@@ -1,83 +1,80 @@
 /* ============================================================================
-   AQEvent Scheduler - Shared Styles
+   AQEvent Scheduler - William & Mary Branded Styles
    File: css/styles.css
+   Designed to match https://www.wm.edu/ branding guidelines
    ============================================================================ */
 
-/* Import Modern Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 /* ============================================================================
-   CSS VARIABLES (Theme Colors & Settings)
+   CSS VARIABLES - WILLIAM & MARY BRAND COLORS
    ============================================================================ */
 
 :root {
-    /* Brand Colors */
-    --primary-dark: #125743;
-    --primary-medium: #50945D;
-    --primary-light: #6FCE81;
-    --primary-gradient: linear-gradient(135deg, #125743 0%, #50945D 100%);
-    --primary-gradient-reverse: linear-gradient(135deg, #50945D 0%, #125743 100%);
-    --background-gradient: linear-gradient(135deg, #6FCE81 0%, #125743 100%);
+    /* Official William & Mary Brand Colors */
+    --wm-primary-green: #115740;
+    --wm-accent-gold: #B9975B;
+    --wm-neutral-light: #F4F4F4;
+    --wm-neutral-dark: #2C2A29;
+    --wm-white: #FFFFFF;
+    --wm-link-blue: #005A9C;
     
-    /* Neutral Colors */
-    --white: #ffffff;
-    --gray-50: #f8f9ff;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-400: #9ca3af;
-    --gray-500: #6b7280;
-    --gray-600: #4b5563;
-    --gray-700: #374151;
-    --gray-800: #2d3748;
-    --gray-900: #1f2937;
+    /* Extended Palette for UI States */
+    --wm-green-light: #1a6b52;
+    --wm-green-dark: #0d3d2a;
+    --wm-gold-light: #c7a66e;
+    --wm-gold-dark: #a08448;
+    --wm-gray-100: #f8f8f8;
+    --wm-gray-200: #e8e8e8;
+    --wm-gray-300: #d1d1d1;
+    --wm-gray-400: #9a9a9a;
+    --wm-gray-500: #6c6c6c;
+    --wm-gray-600: #4a4a4a;
+    --wm-gray-700: #3a3a3a;
+    --wm-gray-800: #2a2a2a;
     
-    /* Status Colors */
-    --success: #059669;
-    --success-light: #10b981;
-    --success-bg: #f0fff4;
-    --error: #dc2626;
-    --error-light: #ef4444;
-    --error-bg: #fef2f2;
-    --warning: #f59e0b;
-    --warning-light: #fbbf24;
-    --warning-bg: #fffbf0;
-    --info: #3b82f6;
-    --info-light: #60a5fa;
-    --info-bg: #eff6ff;
+    /* Status Colors (Academic-appropriate) */
+    --wm-success: #2d7a2d;
+    --wm-warning: #b8860b;
+    --wm-error: #a0342d;
+    --wm-info: var(--wm-link-blue);
     
-    /* Glass Effects */
-    --glass-bg: rgba(255, 255, 255, 0.95);
-    --glass-bg-dark: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --backdrop-blur: blur(20px);
+    /* Typography Scale */
+    --font-family-primary: v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font-size-base: 14px;
+    --font-size-sm: 12px;
+    --font-size-lg: 16px;
+    --font-size-xl: 18px;
+    --font-size-h6: 16px;
+    --font-size-h5: 18px;
+    --font-size-h4: 20px;
+    --font-size-h3: 24px;
+    --font-size-h2: 28px;
+    --font-size-h1: 32px;
+    --line-height-base: 1.6;
+    --line-height-heading: 1.3;
     
-    /* Spacing */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-2xl: 3rem;
+    /* Spacing Scale (Academic Standard) */
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-xl: 48px;
+    --spacing-2xl: 64px;
     
-    /* Border Radius */
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
-    --radius-2xl: 24px;
-    --radius-full: 50px;
+    /* Border Radius (Subtle, Academic) */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
     
-    /* Shadows */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
-    --shadow-xl: 0 25px 80px rgba(0, 0, 0, 0.2);
+    /* Shadows (Professional) */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 0 8px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
     
     /* Transitions */
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+    --transition-slow: 0.35s ease;
 }
 
 /* ============================================================================
@@ -92,327 +89,389 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: var(--font-size-base);
 }
 
 body {
-    font-family: 'Candara', 'Inter', sans-serif;
-    background: var(--background-gradient);
-    min-height: 100vh;
-    padding: var(--spacing-lg);
-    color: var(--gray-800);
-    line-height: 1.6;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--wm-neutral-dark);
+    background-color: var(--wm-neutral-light);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: var(--spacing-sm);
+    min-height: 100vh;
 }
 
 /* ============================================================================
-   CONTAINER & LAYOUT
+   TYPOGRAPHY
+   ============================================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-primary);
+    font-weight: 600;
+    line-height: var(--line-height-heading);
+    color: var(--wm-primary-green);
+    margin-bottom: var(--spacing-sm);
+}
+
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+h4 { font-size: var(--font-size-h4); }
+h5 { font-size: var(--font-size-h5); }
+h6 { font-size: var(--font-size-h6); }
+
+p {
+    margin-bottom: var(--spacing-sm);
+    color: var(--wm-neutral-dark);
+}
+
+a {
+    color: var(--wm-primary-green);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+}
+
+a:hover, a:focus {
+    color: var(--wm-accent-gold);
+    text-decoration: underline;
+}
+
+strong, b {
+    font-weight: 600;
+    color: var(--wm-primary-green);
+}
+
+/* ============================================================================
+   LAYOUT CONTAINERS
    ============================================================================ */
 
 .container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    background: var(--glass-bg);
-    backdrop-filter: var(--backdrop-blur);
-    border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-lg);
+    background: var(--wm-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
     overflow: hidden;
     position: relative;
 }
 
-.container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
-    pointer-events: none;
+.main-content {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
 }
 
 /* ============================================================================
-   HEADER STYLES
+   HEADER STYLES (W&M Academic Style)
    ============================================================================ */
 
 .header {
-    background: var(--primary-gradient);
-    color: var(--white);
-    padding: var(--spacing-2xl);
-    position: relative;
-    overflow: hidden;
-}
-
-.header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    animation: float 20s infinite ease-in-out;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateX(-10px) translateY(-10px) rotate(0deg); }
-    50% { transform: translateX(10px) translateY(10px) rotate(180deg); }
+    background: var(--wm-primary-green);
+    color: var(--wm-white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid var(--wm-accent-gold);
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
-    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
 }
 
 .header-left h1 {
-    font-size: 2.5rem;
+    font-size: var(--font-size-h2);
     font-weight: 700;
-    margin-bottom: var(--spacing-xs);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    color: var(--wm-white);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
 }
 
 .header-left p {
-    font-size: 1.1rem;
-    opacity: 0.9;
+    font-size: var(--font-size-base);
+    color: var(--wm-neutral-light);
+    margin: 0;
+    font-weight: 400;
 }
 
 .header-right {
     display: flex;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     align-items: center;
 }
 
+/* W&M Logo Area (if needed) */
+.wm-logo {
+    height: 40px;
+    width: auto;
+    margin-right: var(--spacing-sm);
+}
+
 /* ============================================================================
-   NAVIGATION BUTTONS
+   NAVIGATION STYLES
    ============================================================================ */
 
 .nav-btn {
-    background: var(--glass-bg-dark);
-    color: var(--white);
-    border: 1px solid var(--glass-border);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--wm-white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: var(--font-size-base);
     font-weight: 500;
     transition: all var(--transition-normal);
-    backdrop-filter: var(--backdrop-blur);
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
 }
 
-.nav-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-/* ============================================================================
-   FORM STYLES
-   ============================================================================ */
-
-.form-container {
-    padding: var(--spacing-2xl);
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-xl);
-}
-
-.form-section {
-    background: var(--gray-50);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
-    border: 1px solid #e1e5f7;
-    transition: all var(--transition-normal);
-    position: relative;
-}
-
-.form-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: var(--primary-gradient);
-    border-radius: var(--radius-sm);
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-}
-
-.form-section:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-}
-
-.form-section:hover::before {
-    opacity: 1;
-}
-
-.section-title {
-    color: var(--primary-dark);
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: var(--spacing-lg);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.form-group {
-    margin-bottom: var(--spacing-lg);
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: var(--spacing-xs);
-    font-weight: 600;
-    color: var(--gray-800);
-    font-size: 0.95rem;
-}
-
-.form-control {
-    width: 100%;
-    padding: 12px 16px;
-    border: 2px solid var(--gray-300);
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-    font-family: inherit;
-    transition: all var(--transition-normal);
-    background: var(--white);
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: var(--primary-dark);
-    box-shadow: 0 0 0 3px rgba(18, 87, 67, 0.1);
+.nav-btn:hover, .nav-btn:focus {
+    background: var(--wm-accent-gold);
+    color: var(--wm-primary-green);
+    text-decoration: none;
     transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
 }
 
-.form-control:hover {
-    border-color: var(--primary-medium);
-}
-
-.required {
-    color: var(--error);
+.nav-btn:active {
+    transform: translateY(0);
 }
 
 /* ============================================================================
-   BUTTON STYLES
+   BUTTON STYLES (W&M Academic Design)
    ============================================================================ */
 
 .btn {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
-    padding: 12px 24px;
-    border: none;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid transparent;
     border-radius: var(--radius-md);
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     font-weight: 500;
-    font-family: inherit;
+    font-family: var(--font-family-primary);
     cursor: pointer;
     transition: all var(--transition-normal);
     text-decoration: none;
-    position: relative;
-    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    line-height: 1.4;
 }
 
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transition: all 0.6s ease;
-    transform: translate(-50%, -50%);
-}
-
-.btn:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.btn:active {
-    transform: translateY(0);
+.btn:focus {
+    outline: 2px solid var(--wm-accent-gold);
+    outline-offset: 2px;
 }
 
 .btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    transform: none;
+    pointer-events: none;
 }
 
-/* Button Variants */
+/* Primary Button (W&M Green) */
 .btn-primary {
-    background: var(--primary-gradient);
-    color: var(--white);
+    background: var(--wm-primary-green);
+    color: var(--wm-white);
+    border-color: var(--wm-primary-green);
 }
 
-.btn-primary:hover {
-    box-shadow: 0 10px 30px rgba(18, 87, 67, 0.3);
+.btn-primary:hover, .btn-primary:focus {
+    background: var(--wm-accent-gold);
+    color: var(--wm-primary-green);
+    border-color: var(--wm-accent-gold);
+    text-decoration: none;
 }
 
+/* Secondary Button (Gold) */
 .btn-secondary {
-    background: var(--gray-200);
-    color: var(--gray-700);
+    background: var(--wm-accent-gold);
+    color: var(--wm-primary-green);
+    border-color: var(--wm-accent-gold);
 }
 
+.btn-secondary:hover, .btn-secondary:focus {
+    background: var(--wm-gold-dark);
+    color: var(--wm-white);
+    border-color: var(--wm-gold-dark);
+    text-decoration: none;
+}
+
+/* Outline Button */
+.btn-outline {
+    background: transparent;
+    color: var(--wm-primary-green);
+    border-color: var(--wm-primary-green);
+}
+
+.btn-outline:hover, .btn-outline:focus {
+    background: var(--wm-primary-green);
+    color: var(--wm-white);
+    text-decoration: none;
+}
+
+/* Status Buttons */
 .btn-success {
-    background: linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%);
-    color: var(--white);
-}
-
-.btn-danger {
-    background: linear-gradient(135deg, var(--error) 0%, var(--error-light) 100%);
-    color: var(--white);
+    background: var(--wm-success);
+    color: var(--wm-white);
+    border-color: var(--wm-success);
 }
 
 .btn-warning {
-    background: linear-gradient(135deg, var(--warning) 0%, var(--warning-light) 100%);
-    color: var(--white);
+    background: var(--wm-warning);
+    color: var(--wm-white);
+    border-color: var(--wm-warning);
+}
+
+.btn-danger {
+    background: var(--wm-error);
+    color: var(--wm-white);
+    border-color: var(--wm-error);
 }
 
 /* Button Sizes */
 .btn-sm {
-    padding: 8px 16px;
-    font-size: 0.875rem;
+    padding: 6px 12px;
+    font-size: var(--font-size-sm);
 }
 
 .btn-lg {
-    padding: 16px 32px;
-    font-size: 1.125rem;
+    padding: 12px 24px;
+    font-size: var(--font-size-lg);
 }
 
 .btn-xl {
-    padding: 20px 40px;
-    font-size: 1.25rem;
-    border-radius: var(--radius-full);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-xl);
+    border-radius: var(--radius-xl);
 }
 
 /* ============================================================================
-   CARD STYLES
+   FORM STYLES (Academic Design)
+   ============================================================================ */
+
+.form-container {
+    padding: var(--spacing-lg);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.form-section {
+    background: var(--wm-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    border: 1px solid var(--wm-gray-200);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+.form-section:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.section-title {
+    color: var(--wm-primary-green);
+    font-size: var(--font-size-h4);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--wm-neutral-light);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--wm-neutral-dark);
+    font-size: var(--font-size-base);
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--wm-gray-300);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family-primary);
+    transition: all var(--transition-normal);
+    background: var(--wm-white);
+    color: var(--wm-neutral-dark);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--wm-primary-green);
+    box-shadow: 0 0 0 2px rgba(17, 87, 64, 0.2);
+}
+
+.form-control:hover {
+    border-color: var(--wm-gray-400);
+}
+
+.form-control::placeholder {
+    color: var(--wm-gray-400);
+}
+
+.required {
+    color: var(--wm-error);
+    font-weight: 600;
+}
+
+/* Form Control Groups */
+.time-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+}
+
+.form-control-group {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.form-control-group .form-control {
+    flex: 1;
+}
+
+/* ============================================================================
+   CARD STYLES (W&M Academic Cards)
    ============================================================================ */
 
 .card {
-    background: var(--white);
+    background: var(--wm-white);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--wm-gray-200);
     overflow: hidden;
     transition: all var(--transition-normal);
     box-shadow: var(--shadow-sm);
@@ -424,29 +483,39 @@ body {
 }
 
 .card-header {
-    background: var(--gray-50);
-    padding: var(--spacing-lg);
-    border-bottom: 1px solid var(--gray-200);
+    background: var(--wm-gray-100);
+    padding: var(--spacing-sm);
+    border-bottom: 1px solid var(--wm-gray-200);
 }
 
 .card-body {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-sm);
+}
+
+.card-footer {
+    background: var(--wm-gray-100);
+    padding: var(--spacing-sm);
+    border-top: 1px solid var(--wm-gray-200);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-xs);
 }
 
 .card-title {
-    font-size: 1.25rem;
+    font-size: var(--font-size-h5);
     font-weight: 600;
-    color: var(--gray-800);
+    color: var(--wm-primary-green);
     margin-bottom: var(--spacing-xs);
 }
 
 .card-subtitle {
-    color: var(--gray-600);
-    font-size: 0.9rem;
+    color: var(--wm-gray-600);
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-sm);
 }
 
 /* ============================================================================
-   MODAL STYLES
+   MODAL STYLES (Academic Dialog Design)
    ============================================================================ */
 
 .modal-overlay {
@@ -455,12 +524,11 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(44, 42, 41, 0.7);
     display: none;
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    backdrop-filter: blur(5px);
 }
 
 .modal-overlay.show {
@@ -468,20 +536,20 @@ body {
 }
 
 .modal {
-    background: var(--white);
+    background: var(--wm-white);
     border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-lg);
     max-width: 90vw;
     max-height: 90vh;
     overflow-y: auto;
     animation: modalSlideIn 0.3s ease;
-    position: relative;
+    border: 1px solid var(--wm-gray-200);
 }
 
 @keyframes modalSlideIn {
     from { 
         opacity: 0; 
-        transform: translateY(-50px) scale(0.9); 
+        transform: translateY(-30px) scale(0.95); 
     }
     to { 
         opacity: 1; 
@@ -490,69 +558,114 @@ body {
 }
 
 .modal-header {
-    background: var(--primary-gradient);
-    color: var(--white);
-    padding: var(--spacing-xl);
+    background: var(--wm-primary-green);
+    color: var(--wm-white);
+    padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     position: relative;
+    border-bottom: 2px solid var(--wm-accent-gold);
 }
 
 .modal-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-h4);
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--wm-white);
 }
 
 .modal-subtitle {
-    opacity: 0.9;
-    font-size: 1rem;
+    font-size: var(--font-size-base);
+    color: var(--wm-neutral-light);
+    margin: 0;
 }
 
 .modal-close {
     position: absolute;
-    top: var(--spacing-lg);
-    right: var(--spacing-xl);
-    background: var(--glass-bg-dark);
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: rgba(255, 255, 255, 0.2);
     border: none;
-    color: var(--white);
-    width: 35px;
-    height: 35px;
+    color: var(--wm-white);
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: var(--font-size-lg);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all var(--transition-normal);
 }
 
-.modal-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
+.modal-close:hover, .modal-close:focus {
+    background: var(--wm-accent-gold);
+    color: var(--wm-primary-green);
 }
 
 .modal-body {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-md);
 }
 
 /* ============================================================================
-   NOTIFICATION STYLES
+   TABLE STYLES (Academic Data Tables)
+   ============================================================================ */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-sm) 0;
+    background: var(--wm-white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--wm-gray-200);
+}
+
+.table th,
+.table td {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--wm-gray-200);
+    font-size: var(--font-size-base);
+}
+
+.table th {
+    background: var(--wm-primary-green);
+    color: var(--wm-white);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.5px;
+}
+
+.table tr:hover {
+    background: var(--wm-gray-100);
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============================================================================
+   NOTIFICATION STYLES (Academic Alerts)
    ============================================================================ */
 
 .notification {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: var(--white);
+    background: var(--wm-white);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-    padding: var(--spacing-md) var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-sm);
     z-index: 10001;
     transform: translateX(400px);
     transition: transform var(--transition-normal);
     border-left: 4px solid;
     max-width: 350px;
     font-weight: 500;
+    font-size: var(--font-size-base);
+    border: 1px solid var(--wm-gray-200);
 }
 
 .notification.show {
@@ -560,23 +673,23 @@ body {
 }
 
 .notification.success { 
-    border-left-color: var(--success); 
-    color: var(--success);
+    border-left-color: var(--wm-success); 
+    color: var(--wm-success);
 }
 
 .notification.error { 
-    border-left-color: var(--error); 
-    color: var(--error);
+    border-left-color: var(--wm-error); 
+    color: var(--wm-error);
 }
 
 .notification.warning { 
-    border-left-color: var(--warning); 
-    color: var(--warning);
+    border-left-color: var(--wm-warning); 
+    color: var(--wm-warning);
 }
 
 .notification.info { 
-    border-left-color: var(--info); 
-    color: var(--info);
+    border-left-color: var(--wm-info); 
+    color: var(--wm-info);
 }
 
 /* ============================================================================
@@ -586,7 +699,7 @@ body {
 .loading {
     display: none;
     text-align: center;
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-lg);
 }
 
 .loading.show {
@@ -594,13 +707,13 @@ body {
 }
 
 .spinner {
-    border: 3px solid var(--gray-300);
-    border-top: 3px solid var(--primary-medium);
+    border: 3px solid var(--wm-gray-300);
+    border-top: 3px solid var(--wm-primary-green);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     animation: spin 1s linear infinite;
-    margin: 0 auto var(--spacing-lg);
+    margin: 0 auto var(--spacing-sm);
 }
 
 @keyframes spin {
@@ -609,124 +722,77 @@ body {
 }
 
 /* ============================================================================
-   TABLE STYLES
+   TOGGLE SWITCH (W&M Style)
    ============================================================================ */
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: var(--spacing-lg) 0;
-    background: var(--white);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-}
-
-.table th,
-.table td {
-    padding: var(--spacing-md);
-    text-align: left;
-    border-bottom: 1px solid var(--gray-200);
-}
-
-.table th {
-    background: var(--primary-dark);
-    color: var(--white);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.875rem;
-    letter-spacing: 0.5px;
-}
-
-.table tr:hover {
-    background: var(--gray-50);
-}
-
-.table tr:last-child td {
-    border-bottom: none;
-}
-
-/* ============================================================================
-   FORM CONTROLS ADVANCED
-   ============================================================================ */
-
-.form-control-group {
-    display: flex;
-    gap: var(--spacing-md);
-}
-
-.form-control-group .form-control {
-    flex: 1;
-}
-
-.time-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-md);
-}
-
-/* Toggle Switch */
 .toggle-container {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-base);
 }
 
 .toggle-switch {
     position: relative;
-    width: 50px;
+    width: 44px;
     height: 24px;
-    background: var(--gray-400);
-    border-radius: 15px;
+    background: var(--wm-gray-400);
+    border-radius: 12px;
     cursor: pointer;
     transition: background var(--transition-normal);
+    border: 1px solid var(--wm-gray-300);
 }
 
 .toggle-switch.active {
-    background: var(--primary-medium);
+    background: var(--wm-primary-green);
+    border-color: var(--wm-primary-green);
 }
 
 .toggle-slider {
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 20px;
-    height: 20px;
-    background: var(--white);
+    width: 18px;
+    height: 18px;
+    background: var(--wm-white);
     border-radius: 50%;
     transition: transform var(--transition-normal);
     box-shadow: var(--shadow-sm);
 }
 
 .toggle-switch.active .toggle-slider {
-    transform: translateX(26px);
+    transform: translateX(20px);
 }
 
-/* Chip Styles */
+/* ============================================================================
+   CHIP/TAG STYLES (Academic Tags)
+   ============================================================================ */
+
 .chip {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
-    background: var(--primary-gradient);
-    color: var(--white);
-    padding: 6px 12px;
-    border-radius: var(--radius-full);
-    font-size: 0.875rem;
+    background: var(--wm-primary-green);
+    color: var(--wm-white);
+    padding: 4px 10px;
+    border-radius: var(--radius-xl);
+    font-size: var(--font-size-sm);
     font-weight: 500;
-    animation: chipSlideIn 0.3s ease;
+    border: 1px solid var(--wm-primary-green);
 }
 
-@keyframes chipSlideIn {
-    from { opacity: 0; transform: translateX(-10px); }
-    to { opacity: 1; transform: translateX(0); }
+.chip-secondary {
+    background: var(--wm-accent-gold);
+    color: var(--wm-primary-green);
+    border-color: var(--wm-accent-gold);
 }
 
 .chip-remove {
     background: rgba(255, 255, 255, 0.3);
     border: none;
-    color: var(--white);
-    width: 18px;
-    height: 18px;
+    color: var(--wm-white);
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -741,37 +807,41 @@ body {
 }
 
 /* ============================================================================
-   UTILITY CLASSES
+   FOOTER (W&M Academic Footer)
    ============================================================================ */
 
-/* Spacing */
-.p-0 { padding: 0; }
-.p-1 { padding: var(--spacing-xs); }
-.p-2 { padding: var(--spacing-sm); }
-.p-3 { padding: var(--spacing-md); }
-.p-4 { padding: var(--spacing-lg); }
-.p-5 { padding: var(--spacing-xl); }
+.footer {
+    background: var(--wm-neutral-dark);
+    color: var(--wm-neutral-light);
+    padding: var(--spacing-md);
+    text-align: center;
+    font-size: var(--font-size-sm);
+    border-top: 3px solid var(--wm-accent-gold);
+}
 
-.m-0 { margin: 0; }
-.m-1 { margin: var(--spacing-xs); }
-.m-2 { margin: var(--spacing-sm); }
-.m-3 { margin: var(--spacing-md); }
-.m-4 { margin: var(--spacing-lg); }
-.m-5 { margin: var(--spacing-xl); }
+.footer a {
+    color: var(--wm-neutral-light);
+}
 
-.mt-auto { margin-top: auto; }
-.mb-auto { margin-bottom: auto; }
+.footer a:hover, .footer a:focus {
+    color: var(--wm-accent-gold);
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
 
 /* Text Utilities */
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 
-.text-primary { color: var(--primary-dark); }
-.text-success { color: var(--success); }
-.text-error { color: var(--error); }
-.text-warning { color: var(--warning); }
-.text-muted { color: var(--gray-500); }
+.text-primary { color: var(--wm-primary-green); }
+.text-gold { color: var(--wm-accent-gold); }
+.text-success { color: var(--wm-success); }
+.text-error { color: var(--wm-error); }
+.text-warning { color: var(--wm-warning); }
+.text-muted { color: var(--wm-gray-500); }
 
 .font-bold { font-weight: 600; }
 .font-semibold { font-weight: 500; }
@@ -796,74 +866,84 @@ body {
     align-items: center;
 }
 
-.flex-column {
-    flex-direction: column;
-}
+.gap-xs { gap: var(--spacing-xs); }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
 
-.flex-wrap {
-    flex-wrap: wrap;
-}
+/* Spacing */
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
 
-.gap-1 { gap: var(--spacing-xs); }
-.gap-2 { gap: var(--spacing-sm); }
-.gap-3 { gap: var(--spacing-md); }
-.gap-4 { gap: var(--spacing-lg); }
+.m-xs { margin: var(--spacing-xs); }
+.m-sm { margin: var(--spacing-sm); }
+.m-md { margin: var(--spacing-md); }
+.m-lg { margin: var(--spacing-lg); }
 
 /* Background */
-.bg-primary { background: var(--primary-gradient); }
-.bg-success { background: var(--success); }
-.bg-error { background: var(--error); }
-.bg-warning { background: var(--warning); }
+.bg-primary { background: var(--wm-primary-green); }
+.bg-gold { background: var(--wm-accent-gold); }
+.bg-light { background: var(--wm-neutral-light); }
+.bg-white { background: var(--wm-white); }
 
-/* Border Radius */
+/* Border */
+.border { border: 1px solid var(--wm-gray-200); }
+.border-primary { border-color: var(--wm-primary-green); }
+.border-gold { border-color: var(--wm-accent-gold); }
+
 .rounded { border-radius: var(--radius-md); }
 .rounded-lg { border-radius: var(--radius-lg); }
-.rounded-full { border-radius: var(--radius-full); }
 
 /* ============================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN (Academic Mobile-First)
    ============================================================================ */
-
-@media (max-width: 1200px) {
-    .container {
-        margin: var(--spacing-md);
-    }
-    
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-}
 
 @media (max-width: 768px) {
     body {
-        padding: var(--spacing-md);
+        padding: var(--spacing-xs);
+    }
+    
+    .container {
+        margin: 0;
+        border-radius: var(--radius-md);
     }
     
     .header {
-        padding: var(--spacing-xl) var(--spacing-lg);
+        padding: var(--spacing-sm);
     }
     
     .header-content {
         flex-direction: column;
-        gap: var(--spacing-lg);
+        gap: var(--spacing-sm);
         text-align: center;
     }
     
     .header-left h1 {
-        font-size: 2rem;
+        font-size: var(--font-size-h3);
     }
     
     .form-container {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-sm);
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .form-section {
+        padding: var(--spacing-sm);
     }
     
     .modal {
         width: 95%;
-        margin: var(--spacing-lg);
+        margin: var(--spacing-sm);
     }
     
     .modal-body {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-sm);
     }
     
     .time-grid {
@@ -871,8 +951,8 @@ body {
     }
     
     .notification {
-        right: var(--spacing-md);
-        left: var(--spacing-md);
+        right: var(--spacing-xs);
+        left: var(--spacing-xs);
         max-width: none;
         transform: translateY(-100px);
     }
@@ -880,69 +960,74 @@ body {
     .notification.show {
         transform: translateY(0);
     }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .card-footer {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .table {
+        font-size: var(--font-size-sm);
+    }
+    
+    .table th,
+    .table td {
+        padding: 6px var(--spacing-xs);
+    }
 }
 
 @media (max-width: 480px) {
     .header-left h1 {
-        font-size: 1.75rem;
+        font-size: var(--font-size-h4);
+    }
+    
+    .section-title {
+        font-size: var(--font-size-h5);
     }
     
     .btn {
-        padding: 10px 16px;
-        font-size: 0.9rem;
-    }
-    
-    .btn-xl {
-        padding: 16px 24px;
-        font-size: 1rem;
+        padding: var(--spacing-xs);
+        font-size: var(--font-size-sm);
     }
     
     .form-section {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-xs);
     }
     
     .modal-body {
-        padding: var(--spacing-md);
+        padding: var(--spacing-xs);
     }
 }
 
 /* ============================================================================
-   PRINT STYLES
-   ============================================================================ */
-
-@media print {
-    body {
-        background: white;
-        padding: 0;
-    }
-    
-    .container {
-        box-shadow: none;
-        border-radius: 0;
-    }
-    
-    .header {
-        background: var(--primary-dark) !important;
-        -webkit-print-color-adjust: exact;
-    }
-    
-    .btn, .nav-btn {
-        display: none;
-    }
-    
-    .modal-overlay {
-        display: none !important;
-    }
-}
-
-/* ============================================================================
-   ACCESSIBILITY
+   ACCESSIBILITY (W&M Compliance)
    ============================================================================ */
 
 /* Focus indicators */
 *:focus-visible {
-    outline: 2px solid var(--primary-dark);
+    outline: 2px solid var(--wm-accent-gold);
     outline-offset: 2px;
+}
+
+/* Ensure sufficient color contrast */
+@media (prefers-contrast: high) {
+    :root {
+        --wm-gray-300: #000000;
+        --wm-gray-600: #000000;
+    }
+    
+    .form-control {
+        border-width: 2px;
+    }
+    
+    .btn {
+        border-width: 2px;
+    }
 }
 
 /* Reduce motion for users who prefer it */
@@ -956,18 +1041,87 @@ body {
     }
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    :root {
-        --gray-300: #000000;
-        --gray-600: #000000;
+/* Print styles */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+        font-size: 12px;
     }
     
-    .form-control {
-        border-width: 3px;
+    .container {
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+    }
+    
+    .header {
+        background: var(--wm-primary-green) !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+    
+    .btn, .nav-btn {
+        display: none;
+    }
+    
+    .modal-overlay {
+        display: none !important;
+    }
+    
+    .notification {
+        display: none !important;
     }
 }
 
 /* ============================================================================
-   END OF STYLES
+   WILLIAM & MARY SPECIFIC COMPONENTS
+   ============================================================================ */
+
+/* Academic Schedule Card */
+.schedule-card {
+    border-left: 4px solid var(--wm-primary-green);
+    background: var(--wm-white);
+    margin-bottom: var(--spacing-sm);
+}
+
+.schedule-card.pending {
+    border-left-color: var(--wm-warning);
+}
+
+.schedule-card.approved {
+    border-left-color: var(--wm-success);
+}
+
+.schedule-card.rejected {
+    border-left-color: var(--wm-error);
+}
+
+/* Academic Event Types */
+.event-type-badge {
+    background: var(--wm-primary-green);
+    color: var(--wm-white);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.event-type-badge.music { background: var(--wm-link-blue); }
+.event-type-badge.theatre { background: var(--wm-accent-gold); color: var(--wm-primary-green); }
+.event-type-badge.seminar { background: var(--wm-success); }
+
+/* William & Mary Branding Footer */
+.wm-branding {
+    font-size: var(--font-size-sm);
+    color: var(--wm-gray-500);
+    text-align: center;
+    padding: var(--spacing-sm);
+    border-top: 1px solid var(--wm-gray-200);
+}
+
+/* ============================================================================
+   END OF WILLIAM & MARY BRANDED STYLES
    ============================================================================ */
