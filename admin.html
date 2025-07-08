@@ -55,43 +55,72 @@
         <!-- Main Admin Content (Hidden until authenticated) -->
         <div id="adminMainContent" class="form-container" style="display: none;">
             
-            <!-- Admin Dashboard Stats -->
+            <!-- Admin Dashboard Stats (Now Clickable!) -->
             <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin-bottom: var(--spacing-xl);">
-                <div class="card">
+                <div class="card clickable-stat-card" id="pendingStatsCard" data-filter="pending">
                     <div class="card-body text-center">
                         <div style="font-size: 2rem; color: var(--wm-warning); margin-bottom: var(--spacing-xs);" id="pendingCount">-</div>
                         <div class="text-muted">Pending Approvals</div>
+                        <small class="text-muted">👆 Click to view</small>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card clickable-stat-card" id="approvedStatsCard" data-filter="approved">
                     <div class="card-body text-center">
                         <div style="font-size: 2rem; color: var(--wm-success); margin-bottom: var(--spacing-xs);" id="approvedCount">-</div>
                         <div class="text-muted">Approved Events</div>
+                        <small class="text-muted">👆 Click to view</small>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card clickable-stat-card" id="todayStatsCard" data-filter="today">
                     <div class="card-body text-center">
                         <div style="font-size: 2rem; color: var(--wm-primary-green); margin-bottom: var(--spacing-xs);" id="todayCount">-</div>
                         <div class="text-muted">Events Today</div>
+                        <small class="text-muted">👆 Click to view</small>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card clickable-stat-card" id="monthStatsCard" data-filter="month">
                     <div class="card-body text-center">
                         <div style="font-size: 2rem; color: var(--wm-accent-gold); margin-bottom: var(--spacing-xs);" id="monthCount">-</div>
                         <div class="text-muted">This Month</div>
+                        <small class="text-muted">👆 Click to view</small>
                     </div>
                 </div>
             </div>
 
-            <!-- Admin Actions Bar -->
+            <!-- Enhanced Filters & Actions Bar -->
             <div class="card" style="margin-bottom: var(--spacing-xl);">
                 <div class="card-body">
-                    <div class="flex-between">
-                        <h3 class="text-primary">📋 Pending Event Approvals</h3>
-                        <div class="flex-center gap-sm">
-                            <button class="btn btn-outline" id="refreshBtn">🔄 Refresh</button>
-                            <button class="btn btn-success" id="approveAllBtn">✅ Approve All</button>
-                            <button class="btn btn-secondary" id="systemHealthBtn">🏥 System Health</button>
+                    <div class="flex-between" style="flex-wrap: wrap; gap: var(--spacing-sm);">
+                        <div>
+                            <h3 class="text-primary" id="currentViewTitle">📋 Pending Event Approvals</h3>
+                            <div id="activeFilters" style="margin-top: var(--spacing-xs);"></div>
+                        </div>
+                        <div class="flex-center gap-sm" style="flex-wrap: wrap;">
+                            <div class="filter-group" style="display: flex; gap: var(--spacing-xs);">
+                                <select id="eventTypeFilter" class="form-control" style="min-width: 150px;">
+                                    <option value="">All Event Types</option>
+                                    <option value="academic">Academic</option>
+                                    <option value="social">Social</option>
+                                    <option value="athletic">Athletic</option>
+                                    <option value="meeting">Meeting</option>
+                                    <option value="workshop">Workshop</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <select id="dateRangeFilter" class="form-control" style="min-width: 150px;">
+                                    <option value="">All Dates</option>
+                                    <option value="today">Today</option>
+                                    <option value="tomorrow">Tomorrow</option>
+                                    <option value="week">This Week</option>
+                                    <option value="month">This Month</option>
+                                    <option value="next-month">Next Month</option>
+                                </select>
+                                <button class="btn btn-outline" id="clearFiltersBtn">🔄 Clear</button>
+                            </div>
+                            <div class="action-group" style="display: flex; gap: var(--spacing-xs);">
+                                <button class="btn btn-outline" id="refreshBtn">🔄 Refresh</button>
+                                <button class="btn btn-success" id="approveAllBtn">✅ Approve All</button>
+                                <button class="btn btn-secondary" id="systemHealthBtn">🏥 System Health</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,17 +132,17 @@
                 <p>Loading admin panel...</p>
             </div>
 
-            <!-- Pending Events Container -->
-            <div id="pendingEventsContainer">
-                <!-- Events will be populated here -->
+            <!-- Main Events Container -->
+            <div id="eventsDisplayContainer">
+                <!-- Events will be populated here based on current view -->
             </div>
 
             <!-- Empty State -->
             <div id="emptyState" class="text-center" style="display: none; padding: var(--spacing-2xl);">
-                <div style="font-size: 4rem; margin-bottom: var(--spacing-lg);">🎉</div>
-                <h3 class="text-primary">All Caught Up!</h3>
-                <p class="text-muted">No pending events to review at this time.</p>
-                <button class="btn btn-primary" onclick="window.location.reload()">🔄 Check Again</button>
+                <div style="font-size: 4rem; margin-bottom: var(--spacing-lg);">📭</div>
+                <h3 class="text-primary" id="emptyStateTitle">No Events Found</h3>
+                <p class="text-muted" id="emptyStateMessage">No events match your current filters.</p>
+                <button class="btn btn-primary" id="emptyStateAction">🔄 Refresh</button>
             </div>
 
             <!-- System Status Panel -->
@@ -299,24 +328,78 @@
         </div>
     </div>
 
+    <!-- Enhanced CSS for clickable stats -->
+    <style>
+        .clickable-stat-card {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .clickable-stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .clickable-stat-card.active {
+            border: 2px solid var(--wm-primary-green);
+            background: var(--wm-primary-green-light);
+        }
+        
+        .filter-group {
+            align-items: center;
+        }
+        
+        .active-filter-tag {
+            display: inline-block;
+            background: var(--wm-primary-green);
+            color: white;
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            margin-right: var(--spacing-xs);
+        }
+        
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .flex-center {
+            display: flex;
+            align-items: center;
+        }
+        
+        .gap-sm {
+            gap: var(--spacing-sm);
+        }
+    </style>
+
     <!-- JavaScript Dependencies -->
     <script src="js/github-api.js"></script>
     <script src="js/app.js"></script>
     
-    <!-- Admin-Specific JavaScript -->
+    <!-- Enhanced Admin-Specific JavaScript -->
     <script>
         // ============================================================================
-        // ADMIN PANEL AUTHENTICATION & MANAGEMENT
+        // ENHANCED ADMIN PANEL WITH CLICKABLE STATS & FILTERING
         // ============================================================================
 
         // Admin state
         let currentEventForAction = null;
         let pendingEvents = [];
+        let approvedEvents = [];
         let adminStats = { pending: 0, approved: 0, today: 0, thisMonth: 0 };
+        let currentView = 'pending';
+        let activeFilters = {
+            eventType: '',
+            dateRange: '',
+            searchTerm: ''
+        };
 
         // Initialize admin panel
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('⚙️ Initializing W&M Admin Panel...');
+            console.log('⚙️ Initializing Enhanced W&M Admin Panel...');
             initializeAdminPanel();
         });
 
@@ -333,7 +416,7 @@
                     showAuthRequired();
                 }
                 
-                console.log('✅ Admin panel initialized');
+                console.log('✅ Enhanced admin panel initialized');
                 
             } catch (error) {
                 console.error('❌ Admin panel initialization failed:', error);
@@ -466,18 +549,34 @@
             document.getElementById('adminMainContent').style.display = 'block';
             document.getElementById('logoutBtn').style.display = 'inline-flex';
             
-            // Setup admin functionality
-            setupAdminControls();
+            // Setup enhanced admin functionality
+            setupEnhancedAdminControls();
             
             // Load admin data
             await loadAdminData();
         }
 
-        // Setup admin controls
-        function setupAdminControls() {
+        // Setup enhanced admin controls
+        function setupEnhancedAdminControls() {
+            // Basic admin controls
             document.getElementById('refreshBtn').addEventListener('click', loadAdminData);
             document.getElementById('approveAllBtn').addEventListener('click', approveAllEvents);
             document.getElementById('systemHealthBtn').addEventListener('click', runSystemHealth);
+            
+            // Enhanced clickable stat cards
+            document.getElementById('pendingStatsCard').addEventListener('click', () => switchView('pending'));
+            document.getElementById('approvedStatsCard').addEventListener('click', () => switchView('approved'));
+            document.getElementById('todayStatsCard').addEventListener('click', () => switchView('today'));
+            document.getElementById('monthStatsCard').addEventListener('click', () => switchView('month'));
+            
+            // Filter controls
+            document.getElementById('eventTypeFilter').addEventListener('change', applyFilters);
+            document.getElementById('dateRangeFilter').addEventListener('change', applyFilters);
+            document.getElementById('clearFiltersBtn').addEventListener('click', clearFilters);
+            document.getElementById('emptyStateAction').addEventListener('click', () => {
+                clearFilters();
+                loadAdminData();
+            });
             
             // Event action modal
             document.getElementById('actionModalClose').addEventListener('click', hideEventActionModal);
@@ -496,22 +595,21 @@
             try {
                 showAdminLoading(true);
                 
-                console.log('📊 Loading admin data...');
+                console.log('📊 Loading enhanced admin data...');
                 
-                // Load pending events
+                // Load both pending and approved events
                 pendingEvents = await window.GitHubAPI.loadPendingEvents();
-                console.log('📋 Loaded', pendingEvents.length, 'pending events');
+                approvedEvents = await window.GitHubAPI.loadApprovedEvents();
                 
-                // Load approved events for stats
-                const approvedEvents = await window.GitHubAPI.loadApprovedEvents();
+                console.log('📋 Loaded', pendingEvents.length, 'pending events');
                 console.log('✅ Loaded', approvedEvents.length, 'approved events');
                 
                 // Calculate statistics
-                calculateStats(approvedEvents);
+                calculateStats();
                 
                 // Update UI
                 updateStatsDisplay();
-                renderPendingEvents();
+                updateCurrentView();
                 
                 showAdminLoading(false);
                 showNotification('Admin data loaded successfully', 'success');
@@ -524,7 +622,7 @@
         }
 
         // Calculate admin statistics
-        function calculateStats(approvedEvents) {
+        function calculateStats() {
             const today = new Date();
             const thisMonth = today.getMonth();
             const thisYear = today.getFullYear();
@@ -532,13 +630,15 @@
             adminStats.pending = pendingEvents.length;
             adminStats.approved = approvedEvents.length;
             
+            // Events today (from approved events)
             adminStats.today = approvedEvents.filter(event => {
-                const eventDate = new Date(event.eventDate);
+                const eventDate = new Date(event.eventDate || event.eventData?.eventDate);
                 return eventDate.toDateString() === today.toDateString();
             }).length;
             
+            // Events this month (from approved events)
             adminStats.thisMonth = approvedEvents.filter(event => {
-                const eventDate = new Date(event.eventDate);
+                const eventDate = new Date(event.eventDate || event.eventData?.eventDate);
                 return eventDate.getMonth() === thisMonth && eventDate.getFullYear() === thisYear;
             }).length;
         }
@@ -549,32 +649,229 @@
             document.getElementById('approvedCount').textContent = adminStats.approved;
             document.getElementById('todayCount').textContent = adminStats.today;
             document.getElementById('monthCount').textContent = adminStats.thisMonth;
+            
+            // Update active card styling
+            document.querySelectorAll('.clickable-stat-card').forEach(card => {
+                card.classList.toggle('active', card.dataset.filter === currentView);
+            });
         }
 
-        // Render pending events
-        function renderPendingEvents() {
-            const container = document.getElementById('pendingEventsContainer');
+        // Switch view based on stat card clicked
+        function switchView(view) {
+            currentView = view;
+            updateCurrentView();
+            updateStatsDisplay();
+            
+            // Clear filters when switching views
+            clearFilters();
+        }
+
+        // Update current view display
+        function updateCurrentView() {
+            const titleElement = document.getElementById('currentViewTitle');
+            let events = [];
+            
+            switch (currentView) {
+                case 'pending':
+                    titleElement.textContent = '📋 Pending Event Approvals';
+                    events = pendingEvents;
+                    document.getElementById('approveAllBtn').style.display = 'inline-flex';
+                    break;
+                    
+                case 'approved':
+                    titleElement.textContent = '✅ Approved Events';
+                    events = approvedEvents;
+                    document.getElementById('approveAllBtn').style.display = 'none';
+                    break;
+                    
+                case 'today':
+                    titleElement.textContent = '📅 Events Today';
+                    events = getEventsForToday();
+                    document.getElementById('approveAllBtn').style.display = 'none';
+                    break;
+                    
+                case 'month':
+                    titleElement.textContent = '📊 Events This Month';
+                    events = getEventsForThisMonth();
+                    document.getElementById('approveAllBtn').style.display = 'none';
+                    break;
+            }
+            
+            renderEvents(events);
+        }
+
+        // Get events for today
+        function getEventsForToday() {
+            const today = new Date();
+            return approvedEvents.filter(event => {
+                const eventDate = new Date(event.eventDate || event.eventData?.eventDate);
+                return eventDate.toDateString() === today.toDateString();
+            });
+        }
+
+        // Get events for this month
+        function getEventsForThisMonth() {
+            const today = new Date();
+            const thisMonth = today.getMonth();
+            const thisYear = today.getFullYear();
+            
+            return approvedEvents.filter(event => {
+                const eventDate = new Date(event.eventDate || event.eventData?.eventDate);
+                return eventDate.getMonth() === thisMonth && eventDate.getFullYear() === thisYear;
+            });
+        }
+
+        // Apply filters
+        function applyFilters() {
+            activeFilters.eventType = document.getElementById('eventTypeFilter').value;
+            activeFilters.dateRange = document.getElementById('dateRangeFilter').value;
+            
+            updateActiveFiltersDisplay();
+            updateCurrentView();
+        }
+
+        // Clear filters
+        function clearFilters() {
+            activeFilters.eventType = '';
+            activeFilters.dateRange = '';
+            activeFilters.searchTerm = '';
+            
+            document.getElementById('eventTypeFilter').value = '';
+            document.getElementById('dateRangeFilter').value = '';
+            
+            updateActiveFiltersDisplay();
+            updateCurrentView();
+        }
+
+        // Update active filters display
+        function updateActiveFiltersDisplay() {
+            const container = document.getElementById('activeFilters');
+            const filters = [];
+            
+            if (activeFilters.eventType) {
+                filters.push(`Type: ${activeFilters.eventType}`);
+            }
+            if (activeFilters.dateRange) {
+                filters.push(`Date: ${activeFilters.dateRange}`);
+            }
+            
+            if (filters.length > 0) {
+                container.innerHTML = filters.map(filter => 
+                    `<span class="active-filter-tag">${filter}</span>`
+                ).join('');
+            } else {
+                container.innerHTML = '';
+            }
+        }
+
+        // Filter events based on active filters
+        function filterEvents(events) {
+            return events.filter(event => {
+                const eventData = event.eventData || event;
+                
+                // Event type filter
+                if (activeFilters.eventType) {
+                    const eventType = (eventData.eventType || '').toLowerCase();
+                    if (!eventType.includes(activeFilters.eventType.toLowerCase())) {
+                        return false;
+                    }
+                }
+                
+                // Date range filter
+                if (activeFilters.dateRange) {
+                    const eventDate = new Date(eventData.eventDate);
+                    const today = new Date();
+                    
+                    switch (activeFilters.dateRange) {
+                        case 'today':
+                            if (eventDate.toDateString() !== today.toDateString()) return false;
+                            break;
+                        case 'tomorrow':
+                            const tomorrow = new Date(today);
+                            tomorrow.setDate(today.getDate() + 1);
+                            if (eventDate.toDateString() !== tomorrow.toDateString()) return false;
+                            break;
+                        case 'week':
+                            const weekEnd = new Date(today);
+                            weekEnd.setDate(today.getDate() + 7);
+                            if (eventDate < today || eventDate > weekEnd) return false;
+                            break;
+                        case 'month':
+                            if (eventDate.getMonth() !== today.getMonth() || 
+                                eventDate.getFullYear() !== today.getFullYear()) return false;
+                            break;
+                        case 'next-month':
+                            const nextMonth = new Date(today);
+                            nextMonth.setMonth(today.getMonth() + 1);
+                            if (eventDate.getMonth() !== nextMonth.getMonth() || 
+                                eventDate.getFullYear() !== nextMonth.getFullYear()) return false;
+                            break;
+                    }
+                }
+                
+                return true;
+            });
+        }
+
+        // Render events based on current view and filters
+        function renderEvents(events) {
+            const container = document.getElementById('eventsDisplayContainer');
             const emptyState = document.getElementById('emptyState');
             
-            if (pendingEvents.length === 0) {
+            // Apply filters
+            const filteredEvents = filterEvents(events);
+            
+            if (filteredEvents.length === 0) {
                 container.innerHTML = '';
                 emptyState.style.display = 'block';
+                
+                // Update empty state based on current view
+                const emptyTitle = document.getElementById('emptyStateTitle');
+                const emptyMessage = document.getElementById('emptyStateMessage');
+                
+                if (currentView === 'pending') {
+                    emptyTitle.textContent = '🎉 All Caught Up!';
+                    emptyMessage.textContent = 'No pending events to review at this time.';
+                } else {
+                    emptyTitle.textContent = '📭 No Events Found';
+                    emptyMessage.textContent = 'No events match your current filters.';
+                }
+                
                 return;
             }
             
             emptyState.style.display = 'none';
             
-            const eventsHTML = pendingEvents.map(event => createEventCard(event)).join('');
+            const eventsHTML = filteredEvents.map(event => createEventCard(event, currentView)).join('');
             container.innerHTML = eventsHTML;
         }
 
-        // Create event card HTML
-        function createEventCard(event) {
+        // Create event card HTML (enhanced for different views)
+        function createEventCard(event, viewType) {
             const eventData = event.eventData || event;
-            const submittedDate = new Date(event.submittedAt || event.submittedDate || Date.now());
+            const submittedDate = new Date(event.submittedAt || event.submittedDate || event.approvedAt || Date.now());
+            
+            // Different card styling based on view type
+            let cardClass = 'card schedule-card';
+            let actionButtons = '';
+            
+            if (viewType === 'pending') {
+                cardClass += ' pending';
+                actionButtons = `
+                    <button class="btn btn-outline btn-sm" onclick="viewEventDetails('${event.id}')">👁️ View Details</button>
+                    <button class="btn btn-danger btn-sm" onclick="rejectEvent('${event.id}')">❌ Reject</button>
+                    <button class="btn btn-success btn-sm" onclick="approveEvent('${event.id}')">✅ Approve</button>
+                `;
+            } else {
+                cardClass += ' approved';
+                actionButtons = `
+                    <button class="btn btn-outline btn-sm" onclick="viewEventDetails('${event.id}')">👁️ View Details</button>
+                    <span class="text-success">✅ Approved</span>
+                `;
+            }
             
             return `
-                <div class="card schedule-card pending" style="margin-bottom: var(--spacing-md);">
+                <div class="${cardClass}" style="margin-bottom: var(--spacing-md);">
                     <div class="card-header">
                         <div class="flex-between">
                             <div>
@@ -582,11 +879,12 @@
                                 <div class="flex-center gap-sm">
                                     <span class="event-type-badge ${(eventData.eventType || '').toLowerCase().replace(/\s+/g, '-')}">${eventData.eventType || 'Unknown'}</span>
                                     <span class="text-muted">📅 ${window.AQEventUtils.DateUtils.formatAcademic(eventData.eventDate)}</span>
+                                    <span class="text-muted">⏰ ${window.AQEventUtils.DateUtils.formatTime(eventData.eventStartTime)}</span>
                                     <span class="text-muted">📍 ${eventData.location}</span>
                                 </div>
                             </div>
                             <div class="text-muted">
-                                <small>Submitted: ${submittedDate.toLocaleDateString()}</small>
+                                <small>${viewType === 'pending' ? 'Submitted' : 'Processed'}: ${submittedDate.toLocaleDateString()}</small>
                             </div>
                         </div>
                     </div>
@@ -610,38 +908,42 @@
                         ${eventData.description ? `<p><strong>Description:</strong> ${eventData.description}</p>` : ''}
                         
                         <div class="card-footer">
-                            <button class="btn btn-outline btn-sm" onclick="viewEventDetails('${event.id}')">👁️ View Details</button>
-                            <button class="btn btn-danger btn-sm" onclick="rejectEvent('${event.id}')">❌ Reject</button>
-                            <button class="btn btn-success btn-sm" onclick="approveEvent('${event.id}')">✅ Approve</button>
+                            ${actionButtons}
                         </div>
                     </div>
                 </div>
             `;
         }
 
-        // Event action functions
+        // Event action functions (unchanged)
         window.viewEventDetails = function(eventId) {
-            const event = pendingEvents.find(e => e.id === eventId);
+            const event = findEventById(eventId);
             if (event) {
                 showEventActionModal(event, 'view');
             }
         };
 
         window.approveEvent = function(eventId) {
-            const event = pendingEvents.find(e => e.id === eventId);
+            const event = findEventById(eventId);
             if (event) {
                 showEventActionModal(event, 'approve');
             }
         };
 
         window.rejectEvent = function(eventId) {
-            const event = pendingEvents.find(e => e.id === eventId);
+            const event = findEventById(eventId);
             if (event) {
                 showEventActionModal(event, 'reject');
             }
         };
 
-        // Show event action modal
+        // Find event by ID across all collections
+        function findEventById(eventId) {
+            return pendingEvents.find(e => e.id === eventId) || 
+                   approvedEvents.find(e => e.id === eventId);
+        }
+
+        // Show event action modal (unchanged)
         function showEventActionModal(event, action) {
             currentEventForAction = event;
             const eventData = event.eventData || event;
@@ -683,9 +985,10 @@
             
             document.getElementById('eventActionContent').innerHTML = content;
             
-            // Show/hide action buttons
-            document.getElementById('approveEventBtn').style.display = action === 'approve' ? 'inline-flex' : 'none';
-            document.getElementById('rejectEventBtn').style.display = action === 'reject' ? 'inline-flex' : 'none';
+            // Show/hide action buttons based on current view
+            const isApproved = currentView !== 'pending';
+            document.getElementById('approveEventBtn').style.display = (!isApproved && action === 'approve') ? 'inline-flex' : 'none';
+            document.getElementById('rejectEventBtn').style.display = (!isApproved && action === 'reject') ? 'inline-flex' : 'none';
             
             document.getElementById('eventActionModal').style.display = 'flex';
             document.getElementById('eventActionModal').classList.add('show');
@@ -769,21 +1072,23 @@
 
         // Approve all events
         async function approveAllEvents() {
-            if (pendingEvents.length === 0) {
+            const eventsToApprove = filterEvents(pendingEvents);
+            
+            if (eventsToApprove.length === 0) {
                 showNotification('No pending events to approve', 'info');
                 return;
             }
             
-            if (!confirm(`Are you sure you want to approve all ${pendingEvents.length} pending events?`)) {
+            if (!confirm(`Are you sure you want to approve all ${eventsToApprove.length} filtered pending events?`)) {
                 return;
             }
             
-            showNotification(`Approving ${pendingEvents.length} events...`, 'info');
+            showNotification(`Approving ${eventsToApprove.length} events...`, 'info');
             
             let approved = 0;
             let errors = 0;
             
-            for (const event of pendingEvents) {
+            for (const event of eventsToApprove) {
                 try {
                     const result = await window.GitHubAPI.approveEvent(event.id);
                     if (result.success) {
@@ -819,6 +1124,7 @@
                             <h6>✅ System Healthy</h6>
                             <p>GitHub API: Connected</p>
                             <p>Repository: ${health.details?.full_name || 'Accessible'}</p>
+                            <p>Events: ${pendingEvents.length} pending, ${approvedEvents.length} approved</p>
                             <p>Last Check: ${new Date().toLocaleString()}</p>
                         </div>
                     `;
@@ -931,7 +1237,7 @@
             };
         }
 
-        console.log('⚙️ Admin panel JavaScript loaded');
+        console.log('⚙️ Enhanced admin panel JavaScript loaded');
     </script>
 </body>
 </html>
