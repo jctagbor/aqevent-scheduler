@@ -1,1 +1,58 @@
-
+{
+  "events": [
+    {
+      "id": "EVT_DEMO_001",
+      "name": "Welcome Concert - AQEvent Launch",
+      "eventDate": "2024-01-15",
+      "location": "Concert Hall (Room 132)",
+      "eventType": "Music",
+      "description": "Inaugural concert to celebrate the launch of the AQEvent scheduling platform",
+      "reservationStartTime": "18:00",
+      "reservationEndTime": "22:00",
+      "eventStartTime": "19:00", 
+      "eventEndTime": "21:00",
+      "contactPerson": "Dr. Sarah Johnson",
+      "contactNumber": "(757) 123-4567",
+      "contactEmail": "sarah.johnson@wm.edu",
+      "staffWorkingEvent": "Dr. Sarah Johnson, Mike Davis, Tech Support Team",
+      "studentEmployeesNeeded": "Yes",
+      "numberOfStudentsNeeded": 3,
+      "assignedStudents": "John Smith, Emily Brown, Alex Wilson",
+      "neededLogistics": "Piano tuning, microphones for announcements, reception setup",
+      "submittedAt": "2024-01-08T10:00:00.000Z",
+      "approvedAt": "2024-01-08T12:00:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "EVT_DEMO_002", 
+      "name": "Theatre Workshop - Acting Techniques",
+      "eventDate": "2024-01-20",
+      "location": "Studio Theatre",
+      "eventType": "Workshop",
+      "description": "Intensive workshop on modern acting techniques for drama students",
+      "reservationStartTime": "14:00",
+      "reservationEndTime": "18:00",
+      "eventStartTime": "14:30",
+      "eventEndTime": "17:30", 
+      "contactPerson": "Prof. Michael Thompson",
+      "contactNumber": "(757) 123-4568",
+      "contactEmail": "m.thompson@wm.edu",
+      "staffWorkingEvent": "Prof. Michael Thompson, Drama Department Assistant",
+      "studentEmployeesNeeded": "No",
+      "numberOfStudentsNeeded": 0,
+      "assignedStudents": "",
+      "neededLogistics": "Moveable stage blocks, basic lighting setup",
+      "submittedAt": "2024-01-08T11:00:00.000Z",
+      "approvedAt": "2024-01-08T13:00:00.000Z", 
+      "status": "approved"
+    }
+  ],
+  "lastUpdated": "2024-01-08T13:00:00.000Z",
+  "count": 2,
+  "metadata": {
+    "description": "Approved events visible in calendar",
+    "version": "1.0",
+    "totalEventsApproved": 2,
+    "lastApprovalDate": "2024-01-08T13:00:00.000Z"
+  }
+}
