@@ -1,1 +1,50 @@
-
+{
+  "students": [
+    "John Smith",
+    "Emily Brown", 
+    "Alex Wilson",
+    "Sarah Johnson",
+    "Mike Davis",
+    "Jessica Chen",
+    "David Rodriguez",
+    "Amanda Taylor",
+    "Chris Anderson",
+    "Maria Garcia",
+    "Ryan O'Connor",
+    "Ashley Kim",
+    "Jordan Martinez",
+    "Taylor Swift",
+    "Brandon Lee",
+    "Nicole White",
+    "Kevin Patel",
+    "Rachel Green",
+    "Tyler Jackson",
+    "Samantha Clark",
+    "Andrew Thompson",
+    "Madison Brown",
+    "Jacob Miller",
+    "Olivia Davis",
+    "Ethan Moore",
+    "Isabella Garcia",
+    "Mason Wilson",
+    "Sophia Anderson",
+    "William Taylor",
+    "Emma Martinez"
+  ],
+  "lastUpdated": "2024-01-08T00:00:00.000Z",
+  "count": 30,
+  "metadata": {
+    "description": "Student names for autocomplete functionality",
+    "version": "1.0",
+    "usage": {
+      "autoComplete": "Used in event form for student assignment",
+      "adminEditable": "Can be modified through admin panel",
+      "sorted": "Alphabetically ordered for better UX"
+    },
+    "statistics": {
+      "totalStudents": 30,
+      "lastAdded": "2024-01-08T00:00:00.000Z",
+      "mostFrequentlyAssigned": "John Smith, Emily Brown, Alex Wilson"
+    }
+  }
+}
