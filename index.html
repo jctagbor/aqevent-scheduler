@@ -687,6 +687,14 @@
         window.resetForm = resetForm;
 
         console.log('📝 Event submission form JavaScript loaded');
+
+        <!-- Add these BEFORE your existing scripts -->
+        <script src="js/conflict-detection.js"></script>
+        <script src="js/conflict-ui.js"></script>
+        
+        <!-- Your existing scripts -->
+        <script src="js/github-api.js"></script>
+        <script src="js/app.js"></script>
     </script>
 </body>
 </html>
