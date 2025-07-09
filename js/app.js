@@ -21,9 +21,9 @@ window.AQEvent = {
     // W&M Academic configuration
     config: {
         timezone: 'America/New_York',
-        academicYear: '2024-2025',
-        semesterStart: '2024-08-26',
-        semesterEnd: '2024-12-13',
+        academicYear: '2025-2026',
+        semesterStart: '2025-07-01',
+        semesterEnd: '2027-06-31',
         
         // W&M specific locations
         locations: [
@@ -43,7 +43,9 @@ window.AQEvent = {
         eventTypes: [
             'Presented Season',
             'Theatre',
-            'Music',
+            'Music Concert',
+            'AQ Music Series',
+            'Conference'
             'Seminar',
             'Arts Exhibition',
             'Workshop',
@@ -55,9 +57,9 @@ window.AQEvent = {
         
         // Academic time slots
         timeSlots: {
-            morning: { start: '08:00', end: '12:00' },
+            morning: { start: '06:00', end: '12:00' },
             afternoon: { start: '12:00', end: '17:00' },
-            evening: { start: '17:00', end: '22:00' }
+            evening: { start: '17:00', end: '23:00' }
         }
     },
     
