@@ -1,5 +1,28 @@
 {
-  "events": [],
-  "lastUpdated": "2025-07-11T14:09:43.819Z",
-  "count": 0
+  "events": [
+    {
+      "id": "EVT_1752243878569_178",
+      "name": "Test2",
+      "eventDate": "2025-07-11",
+      "location": "Studio Theatre",
+      "eventType": "Meeting",
+      "description": "Test Event",
+      "reservationStartTime": "12:00",
+      "reservationEndTime": "13:00",
+      "eventStartTime": "12:15",
+      "eventEndTime": "12:45",
+      "contactPerson": "John Doe",
+      "contactNumber": "(123) 755-8850",
+      "contactEmail": "jaydee@wm.edu",
+      "staffWorkingEvent": "John\nJohn Carl",
+      "neededLogistics": "2 mics\n2 mic stands\n1 piano",
+      "studentEmployeesNeeded": "No",
+      "numberOfStudentsNeeded": 0,
+      "assignedStudents": "",
+      "submittedAt": "2025-07-11T14:24:38.569Z",
+      "status": "pending"
+    }
+  ],
+  "lastUpdated": "2025-07-11T14:24:38.569Z",
+  "count": 1
 }
