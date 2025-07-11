@@ -1,28 +1,5 @@
 {
-  "events": [
-    {
-      "id": "EVT_1752239953083_117",
-      "name": "Test2",
-      "eventDate": "2025-07-11",
-      "location": "Studio Theatre",
-      "eventType": "Theatre",
-      "description": "Test 2",
-      "reservationStartTime": "11:00",
-      "reservationEndTime": "12:00",
-      "eventStartTime": "11:15",
-      "eventEndTime": "11:45",
-      "contactPerson": "John Doe",
-      "contactNumber": "(123) 755-8850",
-      "contactEmail": "jaydee@wm.edu",
-      "staffWorkingEvent": "John\nJohn Carl",
-      "neededLogistics": "2 mics\n2 mic stands\n1 piano",
-      "studentEmployeesNeeded": "Yes",
-      "numberOfStudentsNeeded": "3",
-      "assignedStudents": "Amanda Taylor, Emily Brown, Taylor Swift",
-      "submittedAt": "2025-07-11T13:19:13.083Z",
-      "status": "pending"
-    }
-  ],
-  "lastUpdated": "2025-07-11T13:19:13.083Z",
-  "count": 1
+  "events": [],
+  "lastUpdated": "2025-07-11T14:09:12.093Z",
+  "count": 0
 }
