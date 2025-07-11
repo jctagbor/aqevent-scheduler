@@ -767,19 +767,41 @@ async function handleFormSubmission(event) {
         return;
     }
     
+    // Check if GitHub token exists
+    const authData = window.GitHubAPI.getStoredAuthData();
+    if (!authData || !authData.token) {
+        // Show token setup dialog
+        showTokenSetupDialog();
+        return;
+    }
+    
     try {
-        showLoadingState('Submitting your event for approval...');
+        showLoadingState('Checking for conflicts...');
         
         // Collect form data
         const formData = collectFormData();
         
         // Check for conflicts
         const conflicts = await checkEventConflicts(formData);
+        
         if (conflicts.length > 0) {
             hideLoadingState();
-            showConflictDialog(conflicts, formData);
-            return;
+            
+            // Show conflict confirmation dialog
+            const conflictMessages = conflicts.map(c => c.message).join('\n');
+            const userConfirmed = confirm(
+                `⚠️ SCHEDULING CONFLICTS DETECTED:\n\n${conflictMessages}\n\n` +
+                `Do you want to submit anyway?\n\n` +
+                `Note: The admin will be notified of these conflicts.`
+            );
+            
+            if (!userConfirmed) {
+                showNotification('Submission cancelled. Please choose a different time or location.', 'info');
+                return;
+            }
         }
+        
+        showLoadingState('Submitting your event for approval...');
         
         // Submit to GitHub
         const result = await window.GitHubAPI.submitEventForApproval(formData);
@@ -787,16 +809,86 @@ async function handleFormSubmission(event) {
         hideLoadingState();
         
         if (result.success) {
-            showNotification(`Event submitted successfully! Your event ID is: ${result.eventId}`, 'success');
-            resetForm();
+            // Show success notification
+            showNotification(
+                `✅ Event submitted successfully! Event ID: ${result.eventId}`,
+                'success',
+                7000
+            );
+            
+            // Show success dialog
+            alert(
+                `🎉 Success!\n\n` +
+                `Your event "${formData.name}" has been submitted for approval.\n\n` +
+                `Event ID: ${result.eventId}\n\n` +
+                `What happens next:\n` +
+                `• The Events Committee will review your submission\n` +
+                `• You'll receive an email notification once approved\n` +
+                `• Processing time: 1-3 business days`
+            );
+            
+            // Reset form
+            resetFormAfterSubmission();
+            
         } else {
-            showNotification('Error submitting event: ' + result.message, 'error');
+            showNotification('Error submitting event: ' + (result.message || 'Unknown error'), 'error');
         }
         
     } catch (error) {
         hideLoadingState();
         console.error('❌ Submission error:', error);
-        showNotification('Error submitting event: ' + error.message, 'error');
+        
+        // Check if it's a token/auth issue
+        if (error.message.includes('token') || error.message.includes('401')) {
+            showTokenSetupDialog();
+        } else {
+            showNotification('Error submitting event: ' + error.message, 'error');
+        }
+    }
+}
+
+// Show token setup dialog
+function showTokenSetupDialog() {
+    const token = prompt(
+        '🔐 GitHub Token Required\n\n' +
+        'To submit events, you need to set up a GitHub Personal Access Token.\n\n' +
+        'Please enter your GitHub token:'
+    );
+    
+    if (token) {
+        const password = prompt('Enter the admin password to save this token:');
+        
+        if (password && window.GitHubAPI.validateAdminPassword(password)) {
+            window.GitHubAPI.storeAuthData(token, password);
+            showNotification('Token saved! Please try submitting again.', 'success');
+        } else {
+            showNotification('Invalid password. Token not saved.', 'error');
+        }
+    }
+}
+
+// Reset form after successful submission
+function resetFormAfterSubmission() {
+    const form = document.getElementById('eventForm');
+    if (form) {
+        form.reset();
+        
+        // Clear student chips
+        const chips = document.querySelector('.student-chips');
+        if (chips) chips.innerHTML = '';
+        
+        // Reset toggle
+        const toggle = document.getElementById('studentToggle');
+        if (toggle) toggle.classList.remove('active');
+        
+        const numberGroup = document.getElementById('numberOfStudentsGroup');
+        if (numberGroup) numberGroup.classList.add('d-none');
+        
+        // Clear saved draft
+        localStorage.removeItem('aqevent_form_draft');
+        
+        // Clear any field errors
+        window.AQEventUtils.FormUtils.clearAllErrors(form);
     }
 }
 
@@ -1182,8 +1274,10 @@ async function loadInitialData() {
 
 // Reset form (global function)
 function resetForm() {
-    FormUtils.reset();
-    showNotification('Form reset successfully', 'info');
+    if (confirm('Are you sure you want to reset the form? All unsaved data will be lost.')) {
+        FormUtils.reset();
+        showNotification('Form reset successfully', 'info');
+    }
 }
 
 // Validate complete form (global function)
