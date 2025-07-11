@@ -21,8 +21,30 @@
       "assignedStudents": "",
       "submittedAt": "2025-07-11T15:01:53.300Z",
       "status": "pending"
+    },
+    {
+      "id": "EVT_1752246400279_165",
+      "name": "Test7",
+      "eventDate": "2025-07-12",
+      "location": "Classroom (Room 217)",
+      "eventType": "Others",
+      "description": "Test Event",
+      "reservationStartTime": "17:00",
+      "reservationEndTime": "22:00",
+      "eventStartTime": "17:15",
+      "eventEndTime": "21:45",
+      "contactPerson": "John Doe",
+      "contactNumber": "(123) 755-8850",
+      "contactEmail": "jaydee@wm.edu",
+      "staffWorkingEvent": "John\nJohn Carl",
+      "neededLogistics": "2 mics\n2 mic stands\n1 piano",
+      "studentEmployeesNeeded": "No",
+      "numberOfStudentsNeeded": 0,
+      "assignedStudents": "",
+      "submittedAt": "2025-07-11T15:06:40.279Z",
+      "status": "pending"
     }
   ],
-  "lastUpdated": "2025-07-11T15:01:53.300Z",
-  "count": 1
+  "lastUpdated": "2025-07-11T15:06:40.279Z",
+  "count": 2
 }
