@@ -1,28 +1,5 @@
 {
-  "events": [
-    {
-      "id": "EVT_1752245002142_706",
-      "name": "test6",
-      "eventDate": "2025-07-12",
-      "location": "Laboratory Theatre",
-      "eventType": "Rehearsal",
-      "description": "Test Event",
-      "reservationStartTime": "13:00",
-      "reservationEndTime": "16:00",
-      "eventStartTime": "13:15",
-      "eventEndTime": "15:45",
-      "contactPerson": "John Doe",
-      "contactNumber": "(123) 755-8852",
-      "contactEmail": "jaydee@wm.edu",
-      "staffWorkingEvent": "Stella",
-      "neededLogistics": "Lights",
-      "studentEmployeesNeeded": "No",
-      "numberOfStudentsNeeded": 0,
-      "assignedStudents": "",
-      "submittedAt": "2025-07-11T14:43:22.142Z",
-      "status": "pending"
-    }
-  ],
-  "lastUpdated": "2025-07-11T14:43:22.142Z",
-  "count": 1
+  "events": [],
+  "lastUpdated": "2025-07-11T14:43:51.921Z",
+  "count": 0
 }
