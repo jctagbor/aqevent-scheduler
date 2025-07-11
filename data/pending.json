@@ -1,5 +1,28 @@
 {
-  "events": [],
-  "lastUpdated": "2025-07-11T14:44:05.137Z",
-  "count": 0
+  "events": [
+    {
+      "id": "EVT_1752246113300_955",
+      "name": "Test3",
+      "eventDate": "2025-07-12",
+      "location": "Concert Hall (Room 132)",
+      "eventType": "Music Concert",
+      "description": "Test Event",
+      "reservationStartTime": "19:00",
+      "reservationEndTime": "22:00",
+      "eventStartTime": "19:15",
+      "eventEndTime": "21:45",
+      "contactPerson": "John Doe",
+      "contactNumber": "(123) 755-8850",
+      "contactEmail": "jaydee@wm.edu",
+      "staffWorkingEvent": "John\nJohn Carl",
+      "neededLogistics": "2 mics\n2 mic stands\n1 piano",
+      "studentEmployeesNeeded": "No",
+      "numberOfStudentsNeeded": 0,
+      "assignedStudents": "",
+      "submittedAt": "2025-07-11T15:01:53.300Z",
+      "status": "pending"
+    }
+  ],
+  "lastUpdated": "2025-07-11T15:01:53.300Z",
+  "count": 1
 }
