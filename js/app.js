@@ -45,7 +45,7 @@ window.AQEvent = {
             'Theatre',
             'Music Concert',
             'AQ Music Series',
-            'Conference'
+            'Conference',
             'Seminar',
             'Arts Exhibition',
             'Workshop',
