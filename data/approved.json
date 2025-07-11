@@ -9,7 +9,7 @@
       "description": "Inaugural concert to celebrate the launch of the AQEvent scheduling platform",
       "reservationStartTime": "18:00",
       "reservationEndTime": "22:00",
-      "eventStartTime": "19:00", 
+      "eventStartTime": "19:00",
       "eventEndTime": "21:00",
       "contactPerson": "Dr. Sarah Johnson",
       "contactNumber": "(757) 123-4567",
@@ -24,7 +24,7 @@
       "status": "approved"
     },
     {
-      "id": "EVT_DEMO_002", 
+      "id": "EVT_DEMO_002",
       "name": "Theatre Workshop - Acting Techniques",
       "eventDate": "2024-01-20",
       "location": "Studio Theatre",
@@ -33,7 +33,7 @@
       "reservationStartTime": "14:00",
       "reservationEndTime": "18:00",
       "eventStartTime": "14:30",
-      "eventEndTime": "17:30", 
+      "eventEndTime": "17:30",
       "contactPerson": "Prof. Michael Thompson",
       "contactNumber": "(757) 123-4568",
       "contactEmail": "m.thompson@wm.edu",
@@ -43,16 +43,33 @@
       "assignedStudents": "",
       "neededLogistics": "Moveable stage blocks, basic lighting setup",
       "submittedAt": "2024-01-08T11:00:00.000Z",
-      "approvedAt": "2024-01-08T13:00:00.000Z", 
+      "approvedAt": "2024-01-08T13:00:00.000Z",
       "status": "approved"
+    },
+    {
+      "id": "EVT_1752203148869_128",
+      "name": "Test1",
+      "eventDate": "2025-07-12",
+      "location": "Studio Theatre",
+      "eventType": "Meeting",
+      "description": "Test event",
+      "reservationStartTime": "18:00",
+      "reservationEndTime": "23:00",
+      "eventStartTime": "19:30",
+      "eventEndTime": "22:30",
+      "contactPerson": "John Doe",
+      "contactNumber": "(123) 755-8850",
+      "contactEmail": "jaydee@wm.edu",
+      "staffWorkingEvent": "John \nJohn Carl",
+      "neededLogistics": "2 Mics\n2 Mic stands\n1 Podium\n1 Piano",
+      "studentEmployeesNeeded": "Yes",
+      "numberOfStudentsNeeded": "3",
+      "assignedStudents": "Mike Davis, John Smith, Sarah Johnson, Taylor Swift",
+      "submittedAt": "2025-07-11T03:05:48.869Z",
+      "status": "approved",
+      "approvedAt": "2025-07-11T03:30:12.439Z"
     }
   ],
-  "lastUpdated": "2024-01-08T13:00:00.000Z",
-  "count": 2,
-  "metadata": {
-    "description": "Approved events visible in calendar",
-    "version": "1.0",
-    "totalEventsApproved": 2,
-    "lastApprovalDate": "2024-01-08T13:00:00.000Z"
-  }
+  "lastUpdated": "2025-07-11T03:30:12.439Z",
+  "count": 3
 }
