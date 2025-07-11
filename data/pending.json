@@ -21,8 +21,30 @@
       "assignedStudents": "Mike Davis, John Smith, Sarah Johnson, Taylor Swift",
       "submittedAt": "2025-07-11T03:05:48.869Z",
       "status": "pending"
+    },
+    {
+      "id": "EVT_1752204577724_883",
+      "name": "Test1",
+      "eventDate": "2025-07-12",
+      "location": "Studio Theatre",
+      "eventType": "Meeting",
+      "description": "Test Event",
+      "reservationStartTime": "10:00",
+      "reservationEndTime": "12:00",
+      "eventStartTime": "10:15",
+      "eventEndTime": "11:45",
+      "contactPerson": "John Doe",
+      "contactNumber": "(123) 755-8850",
+      "contactEmail": "jaydee@wm.edu",
+      "staffWorkingEvent": "John\nJohn Carl",
+      "neededLogistics": "2 mics\n2 mic stands\n1 piano",
+      "studentEmployeesNeeded": "Yes",
+      "numberOfStudentsNeeded": "3",
+      "assignedStudents": "Mike Davis, John Smith, Sarah Johnson, Taylor Swift, Jordan Martinez",
+      "submittedAt": "2025-07-11T03:29:37.724Z",
+      "status": "pending"
     }
   ],
-  "lastUpdated": "2025-07-11T03:05:48.869Z",
-  "count": 1
+  "lastUpdated": "2025-07-11T03:29:37.724Z",
+  "count": 2
 }
