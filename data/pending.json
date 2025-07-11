@@ -1,16 +1,16 @@
 {
   "events": [
     {
-      "id": "EVT_1752244804890_268",
-      "name": "Test3",
+      "id": "EVT_1752244873345_581",
+      "name": "Test4",
       "eventDate": "2025-07-11",
-      "location": "Comey Recital Hall (Room 142)",
-      "eventType": "Music Concert",
+      "location": "Instrumental Rehearsal Room (Room 116)",
+      "eventType": "Rehearsal",
       "description": "Test Event",
-      "reservationStartTime": "13:00",
-      "reservationEndTime": "15:00",
-      "eventStartTime": "13:15",
-      "eventEndTime": "14:45",
+      "reservationStartTime": "17:00",
+      "reservationEndTime": "19:00",
+      "eventStartTime": "17:15",
+      "eventEndTime": "18:45",
       "contactPerson": "John Doe",
       "contactNumber": "(123) 755-8850",
       "contactEmail": "jaydee@wm.edu",
@@ -19,10 +19,10 @@
       "studentEmployeesNeeded": "No",
       "numberOfStudentsNeeded": 0,
       "assignedStudents": "",
-      "submittedAt": "2025-07-11T14:40:04.890Z",
+      "submittedAt": "2025-07-11T14:41:13.345Z",
       "status": "pending"
     }
   ],
-  "lastUpdated": "2025-07-11T14:40:04.890Z",
+  "lastUpdated": "2025-07-11T14:41:13.345Z",
   "count": 1
 }
