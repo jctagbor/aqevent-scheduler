@@ -1,31 +1,28 @@
 {
-  "events": [],
-  "lastUpdated": "2024-01-08T00:00:00.000Z",
-  "count": 0,
-  "metadata": {
-    "description": "Pending events awaiting admin approval",
-    "version": "1.0",
-    "schema": {
-      "id": "string - unique event identifier",
-      "name": "string - event name",
-      "eventDate": "string - YYYY-MM-DD format",
-      "location": "string - venue location",
-      "eventType": "string - type of event",
-      "description": "string - event description",
-      "reservationStartTime": "string - HH:MM format",
-      "reservationEndTime": "string - HH:MM format", 
-      "eventStartTime": "string - HH:MM format",
-      "eventEndTime": "string - HH:MM format",
-      "contactPerson": "string - contact name",
-      "contactNumber": "string - phone number",
-      "contactEmail": "string - email address",
-      "staffWorkingEvent": "string - staff members assigned",
-      "studentEmployeesNeeded": "string - Yes/No",
-      "numberOfStudentsNeeded": "number - student count",
-      "assignedStudents": "string - comma-separated names",
-      "neededLogistics": "string - special requirements",
-      "submittedAt": "string - ISO timestamp",
-      "status": "string - pending/approved/rejected"
+  "events": [
+    {
+      "id": "EVT_1752203111440_152",
+      "name": "Test1",
+      "eventDate": "2025-07-12",
+      "location": "Studio Theatre",
+      "eventType": "Meeting",
+      "description": "Test event",
+      "reservationStartTime": "18:00",
+      "reservationEndTime": "23:00",
+      "eventStartTime": "19:30",
+      "eventEndTime": "22:30",
+      "contactPerson": "John Doe",
+      "contactNumber": "(123) 755-8850",
+      "contactEmail": "jaydee@wm.edu",
+      "staffWorkingEvent": "John \nJohn Car;",
+      "neededLogistics": "2 Mics\n2 Mic stands\n1 Podium\n1 Piano",
+      "studentEmployeesNeeded": "Yes",
+      "numberOfStudentsNeeded": "3",
+      "assignedStudents": "Mike Davis, John Smith, Sarah Johnson, Taylor Swift",
+      "submittedAt": "2025-07-11T03:05:11.440Z",
+      "status": "pending"
     }
-  }
+  ],
+  "lastUpdated": "2025-07-11T03:05:11.441Z",
+  "count": 1
 }
