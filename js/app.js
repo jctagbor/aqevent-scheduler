@@ -134,7 +134,7 @@ async function initializeApplication() {
         window.AQEvent.app.isInitialized = true;
         
         hideLoadingState();
-        showNotification('William & Mary Event Scheduler ready! 🎓', 'success');
+        showNotification('Create a new request! 🎓', 'success');
         
         console.log('✅ Enhanced application initialized successfully');
         
