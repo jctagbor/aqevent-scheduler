@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedule Event - AQEvent | William & Mary</title>
+    <title>Request Event - AQEvent | William & Mary</title>
     <meta name="description" content="Submit an event for approval at William & Mary using the AQEvent scheduling platform.">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='80'%3E🎓%3C/text%3E%3C/svg%3E">
@@ -14,8 +14,8 @@
         <div class="header">
             <div class="header-content">
                 <div class="header-left">
-                    <h1>🎓 Schedule New Event</h1>
-                    <p>Submit your event for approval at William & Mary</p>
+                    <h1>📝Create new Event request</h1>
+                    <p>Submit your event for approval at William & Mary Office of the Arts</p>
                 </div>
                 <div class="header-right">
                     <a href="?page=calendar" class="nav-btn">📅 View Calendar</a>
@@ -30,7 +30,7 @@
             <div id="messageContainer"></div>
 
             <!-- Event Submission Form -->
-            <form id="eventForm" novalidate>
+            <form id="eventForm" novalidate enctype="multipart/form-data">
                 <div class="form-grid">
                     
                     <!-- Basic Event Information Section -->
@@ -52,19 +52,6 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="eventDate">
-                                Event Date <span class="required">*</span>
-                            </label>
-                            <input 
-                                type="date" 
-                                id="eventDate" 
-                                class="form-control" 
-                                required
-                            >
-                            <small class="text-muted">Must be within the 2025-2026 academic year</small>
-                        </div>
-                        
-                        <div class="form-group">
                             <label for="location">
                                 Location <span class="required">*</span>
                             </label>
@@ -83,24 +70,181 @@
                                 <!-- Options populated by JavaScript -->
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label for="estimatedAttendees">
+                                Estimated Number of Attendees <span class="required">*</span>
+                            </label>
+                            <input 
+                                type="number" 
+                                id="estimatedAttendees" 
+                                class="form-control" 
+                                required 
+                                min="1" 
+                                max="10000"
+                                placeholder="Enter estimated number of attendees"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="totalPerformers">
+                                Total Number of Performers/Musicians/Speakers
+                            </label>
+                            <input 
+                                type="number" 
+                                id="totalPerformers" 
+                                class="form-control" 
+                                min="0" 
+                                max="1000"
+                                placeholder="Enter total number of performers"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Staffing Support Required <span class="required">*</span></label>
+                            <div class="toggle-container">
+                                <span>No</span>
+                                <div class="toggle-switch" id="staffingSupportToggle">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                                <span>Yes</span>
+                            </div>
+                            <small class="text-muted">If yes, please provide details about staffing needs in the description below (e.g., backstage support, creative director, technical assistance)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="estimatedBudget">
+                                Estimated Event Budget
+                            </label>
+                            <div class="currency-input-group">
+                                <span class="currency-symbol">$</span>
+                                <input 
+                                    type="number" 
+                                    id="estimatedBudget" 
+                                    class="form-control currency-input" 
+                                    min="0" 
+                                    step="0.01"
+                                    placeholder="0.00"
+                                >
+                            </div>
+                            <small class="text-muted">Optional: Estimated total budget for the event</small>
+                        </div>
                         
                         <div class="form-group">
-                            <label for="description">Description</label>
+                            <label for="description">Description <span class="required">*</span></label>
                             <textarea 
                                 id="description" 
                                 class="form-control" 
                                 rows="4" 
-                                placeholder="Provide a brief description of your event"
-                                maxlength="500"
+                                required
+                                placeholder="Provide a detailed description of your event. If staffing support is required, please include specific details about what type of support is needed."
+                                maxlength="1000"
                             ></textarea>
-                            <small class="text-muted">Optional: Provide additional details about your event</small>
+                            <small class="text-muted">Detailed event description and any special requirements</small>
                         </div>
                     </div>
                     
-                    <!-- Timing Information Section -->
+                    <!-- Multiple Dates & Timing Section -->
                     <div class="form-section">
-                        <h3 class="section-title">⏰ Timing Details</h3>
+                        <h3 class="section-title">📅 Event Dates & Timing</h3>
                         
+                        <!-- Date Selection Type -->
+                        <div class="form-group">
+                            <label>Event Frequency <span class="required">*</span></label>
+                            <select id="eventFrequency" class="form-control" required>
+                                <option value="">Select frequency</option>
+                                <option value="single">Single Event (One Date)</option>
+                                <option value="multiple">Multiple Specific Dates</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="yearly">Yearly</option>
+                            </select>
+                        </div>
+
+                        <!-- Single Date Selection -->
+                        <div class="form-group" id="singleDateGroup" style="display: none;">
+                            <label for="eventDate">
+                                Event Date <span class="required">*</span>
+                            </label>
+                            <input 
+                                type="date" 
+                                id="eventDate" 
+                                class="form-control"
+                            >
+                        </div>
+
+                        <!-- Multiple Dates Selection -->
+                        <div class="form-group" id="multipleDatesGroup" style="display: none;">
+                            <label>Select Multiple Dates</label>
+                            <div class="multiple-dates-container">
+                                <input type="date" id="multipleDateInput" class="form-control" style="margin-bottom: 10px;">
+                                <button type="button" class="btn btn-outline" id="addDateBtn">+ Add Date</button>
+                                <div id="selectedDatesList" class="selected-dates-list"></div>
+                            </div>
+                        </div>
+
+                        <!-- Recurring Event Settings -->
+                        <div class="form-group" id="recurringGroup" style="display: none;">
+                            <div class="recurring-settings">
+                                <!-- Start Date -->
+                                <div class="form-group">
+                                    <label for="recurringStartDate">Start Date <span class="required">*</span></label>
+                                    <input type="date" id="recurringStartDate" class="form-control">
+                                </div>
+
+                                <!-- End Date -->
+                                <div class="form-group">
+                                    <label for="recurringEndDate">End Date <span class="required">*</span></label>
+                                    <input type="date" id="recurringEndDate" class="form-control">
+                                </div>
+
+                                <!-- Interval -->
+                                <div class="form-group" id="intervalGroup">
+                                    <label for="recurringInterval">Repeat Every</label>
+                                    <div class="interval-input-group">
+                                        <input type="number" id="recurringInterval" class="form-control" min="1" value="1" style="width: 80px;">
+                                        <span id="intervalLabel">day(s)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Days of Week (for weekly) -->
+                                <div class="form-group" id="daysOfWeekGroup" style="display: none;">
+                                    <label>Days of the Week</label>
+                                    <div class="days-of-week-selector">
+                                        <label class="day-checkbox"><input type="checkbox" value="0"> Sunday</label>
+                                        <label class="day-checkbox"><input type="checkbox" value="1"> Monday</label>
+                                        <label class="day-checkbox"><input type="checkbox" value="2"> Tuesday</label>
+                                        <label class="day-checkbox"><input type="checkbox" value="3"> Wednesday</label>
+                                        <label class="day-checkbox"><input type="checkbox" value="4"> Thursday</label>
+                                        <label class="day-checkbox"><input type="checkbox" value="5"> Friday</label>
+                                        <label class="day-checkbox"><input type="checkbox" value="6"> Saturday</label>
+                                    </div>
+                                </div>
+
+                                <!-- Monthly Options -->
+                                <div class="form-group" id="monthlyOptionsGroup" style="display: none;">
+                                    <label>Monthly Pattern</label>
+                                    <div class="monthly-options">
+                                        <label class="radio-option">
+                                            <input type="radio" name="monthlyPattern" value="date"> Same date each month
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="monthlyPattern" value="day"> Same day of week each month
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preview of Generated Dates -->
+                            <div class="recurring-preview">
+                                <h6>Event Dates Preview:</h6>
+                                <div id="recurringPreview" class="dates-preview"></div>
+                                <button type="button" class="btn btn-outline btn-sm" id="generatePreviewBtn">Generate Preview</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Time Details -->
                         <div class="form-group">
                             <label>Reservation Time <span class="required">*</span></label>
                             <small class="text-muted">Time needed for setup and cleanup</small>
@@ -150,18 +294,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Academic Time Slot Helper -->
-                        <div class="card" style="margin-top: var(--spacing-sm);">
-                            <div class="card-body">
-                                <h6 class="card-title text-primary">💡 Academic Time Slots</h6>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-sm); font-size: var(--font-size-sm);">
-                                    <div><strong>Morning:</strong> 8:00 AM - 12:00 PM</div>
-                                    <div><strong>Afternoon:</strong> 12:00 PM - 5:00 PM</div>
-                                    <div><strong>Evening:</strong> 5:00 PM - 10:00 PM</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     
                     <!-- Contact Information Section -->
@@ -180,6 +312,50 @@
                                 placeholder="Full name of primary contact"
                                 maxlength="100"
                             >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="groupCompanyName">
+                                Group or Company Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="groupCompanyName" 
+                                class="form-control" 
+                                placeholder="Enter group or company name"
+                                maxlength="100"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="groupCompanyType">
+                                Group or Company Type <span class="required">*</span>
+                            </label>
+                            <select id="groupCompanyType" class="form-control" required>
+                                <option value="">Select type</option>
+                                <option value="wm-student-group">WM Student/Group</option>
+                                <option value="wm-department">WM Department/College/Faculty/Office</option>
+                                <option value="external-organization">External Organization</option>
+                            </select>
+                        </div>
+
+                        <!-- External Organization Details -->
+                        <div class="form-group" id="externalOrgDetails" style="display: none;">
+                            <label>Organization Type</label>
+                            <div class="organization-checkboxes">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="profitOrg" name="orgTypes"> Profit Organization
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="nonProfitOrg" name="orgTypes"> Non-Profit Organization
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="vaTaxExempt" name="orgTypes"> Virginia Sales Tax Exempt
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="org501c3" name="orgTypes"> 501(c)3 Organization
+                                </label>
+                            </div>
                         </div>
                         
                         <div class="form-group">
@@ -209,79 +385,60 @@
                             >
                             <small class="text-muted">We recommend using your William & Mary email address</small>
                         </div>
-                    </div>
-                    
-                    <!-- Staff and Logistics Section -->
-                    <div class="form-section">
-                        <h3 class="section-title">👥 Staff & Logistics</h3>
-                        
+
                         <div class="form-group">
-                            <label for="staffWorkingEvent">
-                                Staff Working the Event <span class="required">*</span>
+                            <label for="websiteAddress">
+                                Website Address or Social Media Handle
                             </label>
-                            <textarea 
-                                id="staffWorkingEvent" 
-                                class="form-control" 
-                                rows="3" 
-                                required
-                                placeholder="Enter staff names (comma-separated)"
-                                maxlength="300"
-                            ></textarea>
-                            <small class="text-muted">List all staff members who will be working at this event</small>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="neededLogistics">Needed Logistics</label>
-                            <textarea 
-                                id="neededLogistics" 
-                                class="form-control" 
-                                rows="3" 
-                                placeholder="List any special equipment, setup requirements, etc."
-                                maxlength="500"
-                            ></textarea>
-                            <small class="text-muted">Optional: Describe any special equipment or setup needs</small>
-                        </div>
-                        
-                        <!-- Student Employee Toggle -->
-                        <div class="form-group">
-                            <label>Student Employees Needed <span class="required">*</span></label>
-                            <div class="toggle-container">
-                                <span>No</span>
-                                <div class="toggle-switch" id="studentToggle">
-                                    <div class="toggle-slider"></div>
-                                </div>
-                                <span>Yes</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Number of Students (Hidden Initially) -->
-                        <div class="form-group d-none" id="numberOfStudentsGroup">
-                            <label for="numberOfStudents">Number of Students Needed</label>
                             <input 
-                                type="number" 
-                                id="numberOfStudents" 
+                                type="url" 
+                                id="websiteAddress" 
                                 class="form-control" 
-                                min="1" 
-                                max="50" 
-                                placeholder="Enter number"
+                                placeholder="https://www.example.com or @socialmediahandle"
                             >
-                            <small class="text-muted">How many student employees do you need?</small>
+                            <small class="text-muted">Website or social media for your organization/event</small>
                         </div>
+                    </div>
+
+                    <!-- File Upload Section -->
+                    <div class="form-section">
+                        <h3 class="section-title">📎 Event Documents</h3>
                         
-                        <!-- Student Assignment -->
                         <div class="form-group">
-                            <label for="assignedStudents">Assigned Students</label>
-                            <div class="student-input-container" style="position: relative;">
-                                <input 
-                                    type="text" 
-                                    id="assignedStudents" 
-                                    class="form-control" 
-                                    placeholder="Type student name and press Enter"
-                                >
-                                <!-- Autocomplete dropdown will be added by JavaScript -->
-                            </div>
-                            <!-- Student chips container will be added by JavaScript -->
-                            <small class="text-muted">Optional: Pre-assign specific students to this event</small>
+                            <label for="eventFiles">
+                                Upload Event Files
+                            </label>
+                            <input 
+                                type="file" 
+                                id="eventFiles" 
+                                class="form-control file-input" 
+                                multiple
+                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.txt,.xlsx,.xls,.ppt,.pptx"
+                            >
+                            <small class="text-muted">
+                                Optional: Upload event-related documents (flyers, schedules, contracts, etc.)<br>
+                                Supported formats: PDF, DOC, DOCX, images, spreadsheets, presentations
+                            </small>
+                            <div id="filePreview" class="file-preview-container"></div>
+                        </div>
+                    </div>
+
+                    <!-- Acknowledgements Section -->
+                    <div class="form-section">
+                        <h3 class="section-title">✅ Acknowledgements</h3>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label acknowledgement-checkbox">
+                                <input type="checkbox" id="bookingAcknowledgement" required>
+                                <span>I understand that this form does not serve as a confirmation of booking and is a request form only. <span class="required">*</span></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label acknowledgement-checkbox">
+                                <input type="checkbox" id="expenseAcknowledgement" required>
+                                <span>I understand I or my organization are responsible for any expenses. This can include equipment fees, labor/staffing charges, facility fees, ticketing charges, etc., as well as any damages to WM property. <span class="required">*</span></span>
+                            </label>
                         </div>
                     </div>
                     
@@ -355,6 +512,303 @@
         </div>
     </div>
 
+    <!-- Enhanced CSS for New Features -->
+    <style>
+        /* Currency Input Styling */
+        .currency-input-group {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--wm-gray-300);
+            border-radius: var(--radius-sm);
+            transition: border-color var(--transition-normal);
+        }
+
+        .currency-input-group:focus-within {
+            border-color: var(--wm-primary-green);
+            box-shadow: 0 0 0 2px rgba(17, 87, 64, 0.2);
+        }
+
+        .currency-symbol {
+            background: var(--wm-gray-100);
+            padding: 10px 12px;
+            color: var(--wm-gray-600);
+            font-weight: 500;
+            border-right: 1px solid var(--wm-gray-300);
+        }
+
+        .currency-input {
+            border: none !important;
+            box-shadow: none !important;
+            flex: 1;
+        }
+
+        /* Multiple Dates Styling */
+        .multiple-dates-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .selected-dates-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+            margin-top: var(--spacing-sm);
+        }
+
+        .date-chip {
+            background: var(--wm-primary-green);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: var(--font-size-sm);
+        }
+
+        .date-chip-remove {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .date-chip-remove:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Recurring Event Styling */
+        .recurring-settings {
+            background: var(--wm-gray-50);
+            border: 1px solid var(--wm-gray-200);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .interval-input-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .days-of-week-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--spacing-xs);
+            margin-top: var(--spacing-xs);
+        }
+
+        .day-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs);
+            background: var(--wm-gray-100);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: background-color var(--transition-normal);
+        }
+
+        .day-checkbox:hover {
+            background: var(--wm-gray-200);
+        }
+
+        .day-checkbox input:checked + span {
+            font-weight: 600;
+            color: var(--wm-primary-green);
+        }
+
+        .monthly-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            margin-top: var(--spacing-xs);
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs);
+            cursor: pointer;
+        }
+
+        .recurring-preview {
+            background: var(--wm-white);
+            border: 1px solid var(--wm-gray-200);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+        }
+
+        .dates-preview {
+            background: var(--wm-gray-50);
+            border: 1px solid var(--wm-gray-200);
+            border-radius: var(--radius-sm);
+            padding: var(--spacing-sm);
+            margin: var(--spacing-sm) 0;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: var(--font-size-sm);
+        }
+
+        /* Organization Type Styling */
+        .organization-checkboxes {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            margin-top: var(--spacing-xs);
+            padding: var(--spacing-sm);
+            background: var(--wm-gray-50);
+            border-radius: var(--radius-sm);
+        }
+
+        .organization-checkboxes .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs);
+            cursor: pointer;
+        }
+
+        /* File Upload Styling */
+        .file-input {
+            border: 2px dashed var(--wm-gray-300);
+            background: var(--wm-gray-50);
+            padding: var(--spacing-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .file-input:hover {
+            border-color: var(--wm-primary-green);
+            background: var(--wm-primary-green-light);
+        }
+
+        .file-preview-container {
+            margin-top: var(--spacing-sm);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .file-preview-item {
+            background: var(--wm-white);
+            border: 1px solid var(--wm-gray-200);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            max-width: 300px;
+        }
+
+        .file-preview-icon {
+            font-size: 1.5rem;
+        }
+
+        .file-preview-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .file-preview-name {
+            font-weight: 500;
+            color: var(--wm-primary-green);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-preview-size {
+            font-size: var(--font-size-sm);
+            color: var(--wm-gray-600);
+        }
+
+        .file-preview-remove {
+            background: var(--wm-error);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .file-preview-remove:hover {
+            background: var(--wm-error-dark);
+        }
+
+        /* Acknowledgement Styling */
+        .acknowledgement-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+            background: var(--wm-gray-50);
+            border: 1px solid var(--wm-gray-200);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-sm);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .acknowledgement-checkbox:hover {
+            background: var(--wm-gray-100);
+            border-color: var(--wm-primary-green);
+        }
+
+        .acknowledgement-checkbox input[type="checkbox"] {
+            margin-top: 2px;
+            transform: scale(1.2);
+        }
+
+        .acknowledgement-checkbox span {
+            line-height: 1.5;
+            color: var(--wm-text-primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .days-of-week-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .time-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .interval-input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .currency-input-group {
+                flex-direction: column;
+            }
+
+            .currency-symbol {
+                border-right: none;
+                border-bottom: 1px solid var(--wm-gray-300);
+                width: 100%;
+            }
+        }
+    </style>
+
     <!-- JavaScript Dependencies -->
     <!-- Load conflict detection BEFORE the main scripts -->
     <script src="js/conflict-detection.js"></script>
@@ -364,295 +818,890 @@
     <script src="js/github-api.js"></script>
     <script src="js/app.js"></script>
     
-    <!-- Form-Specific JavaScript -->
+    <!-- Enhanced Form JavaScript -->
     <script>
         // ============================================================================
-        // EVENT FORM SPECIFIC FUNCTIONALITY
+        // ENHANCED EVENT FORM WITH NEW FEATURES
         // ============================================================================
 
-        // Initialize form when page loads
+        // Global form state
+        let selectedMultipleDates = [];
+        let uploadedFiles = [];
+        let generatedRecurringDates = [];
+
+        // Initialize enhanced form when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📝 Initializing W&M Event Submission Form...');
+            console.log('📝 Initializing Enhanced W&M Event Form...');
             
             // Wait for app.js to initialize
             if (window.AQEvent && window.AQEvent.app.isInitialized) {
-                setupFormSpecificFeatures();
+                setupEnhancedFormFeatures();
             } else {
                 // Wait for initialization
                 const checkInit = setInterval(() => {
                     if (window.AQEvent && window.AQEvent.app.isInitialized) {
                         clearInterval(checkInit);
-                        setupFormSpecificFeatures();
+                        setupEnhancedFormFeatures();
                     }
                 }, 100);
             }
         });
 
-        // Setup form-specific features
-        function setupFormSpecificFeatures() {
-            setupStudentToggle();
-            setupEventPreview();
-            setupTimeHelpers();
-            setupFormAutoSave();
+        // Setup enhanced form features
+        function setupEnhancedFormFeatures() {
+            setupCurrencyInput();
+            setupStaffingToggle();
+            setupGroupTypeHandling();
+            setupOrganizationTypeLogic();
+            setupFileUpload();
+            setupEventFrequencyHandling();
+            setupMultipleDatesSystem();
+            setupRecurringEventsSystem();
+            setupFormValidation();
             
-            console.log('✅ Event form ready!');
+            console.log('✅ Enhanced event form ready!');
         }
 
-        // Setup student employee toggle
-        function setupStudentToggle() {
-            const toggle = document.getElementById('studentToggle');
-            const numberGroup = document.getElementById('numberOfStudentsGroup');
+        // ============================================================================
+        // CURRENCY INPUT FORMATTING
+        // ============================================================================
+
+        function setupCurrencyInput() {
+            const budgetInput = document.getElementById('estimatedBudget');
+            if (!budgetInput) return;
+
+            budgetInput.addEventListener('input', function(e) {
+                let value = e.target.value;
+                
+                // Remove any non-numeric characters except decimal point
+                value = value.replace(/[^0-9.]/g, '');
+                
+                // Ensure only one decimal point
+                const parts = value.split('.');
+                if (parts.length > 2) {
+                    value = parts[0] + '.' + parts.slice(1).join('');
+                }
+                
+                // Limit to 2 decimal places
+                if (parts[1] && parts[1].length > 2) {
+                    value = parts[0] + '.' + parts[1].slice(0, 2);
+                }
+                
+                e.target.value = value;
+            });
+
+            budgetInput.addEventListener('blur', function(e) {
+                let value = parseFloat(e.target.value);
+                if (!isNaN(value)) {
+                    e.target.value = value.toFixed(2);
+                }
+            });
+        }
+
+        // ============================================================================
+        // STAFFING SUPPORT TOGGLE
+        // ============================================================================
+
+        function setupStaffingToggle() {
+            const toggle = document.getElementById('staffingSupportToggle');
+            if (!toggle) return;
+
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                
+                // Update description placeholder based on staffing support
+                const description = document.getElementById('description');
+                const isStaffingRequired = this.classList.contains('active');
+                
+                if (isStaffingRequired) {
+                    description.placeholder = 'Provide a detailed description of your event. REQUIRED: Please specify what type of staffing support you need (e.g., backstage support, creative director, technical assistance, sound engineer, etc.).';
+                    description.focus();
+                } else {
+                    description.placeholder = 'Provide a detailed description of your event.';
+                }
+            });
+        }
+
+        // ============================================================================
+        // GROUP TYPE HANDLING
+        // ============================================================================
+
+        function setupGroupTypeHandling() {
+            const groupTypeSelect = document.getElementById('groupCompanyType');
+            const externalOrgDetails = document.getElementById('externalOrgDetails');
             
-            if (toggle && numberGroup) {
-                toggle.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    
-                    if (this.classList.contains('active')) {
-                        numberGroup.classList.remove('d-none');
-                        numberGroup.style.animation = 'slideDown 0.3s ease';
-                        document.getElementById('numberOfStudents').focus();
-                    } else {
-                        numberGroup.classList.add('d-none');
-                        document.getElementById('numberOfStudents').value = '';
-                    }
+            if (!groupTypeSelect || !externalOrgDetails) return;
+
+            groupTypeSelect.addEventListener('change', function() {
+                if (this.value === 'external-organization') {
+                    externalOrgDetails.style.display = 'block';
+                    externalOrgDetails.style.animation = 'slideDown 0.3s ease';
+                } else {
+                    externalOrgDetails.style.display = 'none';
+                    // Clear all checkboxes
+                    externalOrgDetails.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                        cb.checked = false;
+                    });
+                }
+            });
+        }
+
+        // ============================================================================
+        // ORGANIZATION TYPE LOGIC
+        // ============================================================================
+
+        function setupOrganizationTypeLogic() {
+            const profitOrg = document.getElementById('profitOrg');
+            const nonProfitOrg = document.getElementById('nonProfitOrg');
+            const vaTaxExempt = document.getElementById('vaTaxExempt');
+            const org501c3 = document.getElementById('org501c3');
+
+            if (!profitOrg || !nonProfitOrg) return;
+
+            // Mutual exclusion between profit and non-profit
+            profitOrg.addEventListener('change', function() {
+                if (this.checked) {
+                    nonProfitOrg.checked = false;
+                }
+            });
+
+            nonProfitOrg.addEventListener('change', function() {
+                if (this.checked) {
+                    profitOrg.checked = false;
+                    // Auto-check related non-profit options
+                    if (vaTaxExempt) vaTaxExempt.checked = true;
+                    if (org501c3) org501c3.checked = true;
+                } else {
+                    // Uncheck related options if non-profit is unchecked
+                    if (vaTaxExempt) vaTaxExempt.checked = false;
+                    if (org501c3) org501c3.checked = false;
+                }
+            });
+        }
+
+        // ============================================================================
+        // FILE UPLOAD SYSTEM
+        // ============================================================================
+
+        function setupFileUpload() {
+            const fileInput = document.getElementById('eventFiles');
+            const previewContainer = document.getElementById('filePreview');
+            
+            if (!fileInput || !previewContainer) return;
+
+            fileInput.addEventListener('change', function(e) {
+                const files = Array.from(e.target.files);
+                uploadedFiles = [...uploadedFiles, ...files];
+                updateFilePreview();
+            });
+        }
+
+        function updateFilePreview() {
+            const previewContainer = document.getElementById('filePreview');
+            if (!previewContainer) return;
+
+            previewContainer.innerHTML = '';
+
+            uploadedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-preview-item';
+                
+                const icon = getFileIcon(file.type);
+                const size = formatFileSize(file.size);
+                
+                fileItem.innerHTML = `
+                    <div class="file-preview-icon">${icon}</div>
+                    <div class="file-preview-info">
+                        <div class="file-preview-name" title="${file.name}">${file.name}</div>
+                        <div class="file-preview-size">${size}</div>
+                    </div>
+                    <button type="button" class="file-preview-remove" onclick="removeFile(${index})">×</button>
+                `;
+                
+                previewContainer.appendChild(fileItem);
+            });
+        }
+
+        function getFileIcon(mimeType) {
+            if (mimeType.startsWith('image/')) return '🖼️';
+            if (mimeType.includes('pdf')) return '📄';
+            if (mimeType.includes('word') || mimeType.includes('document')) return '📝';
+            if (mimeType.includes('sheet') || mimeType.includes('excel')) return '📊';
+            if (mimeType.includes('presentation') || mimeType.includes('powerpoint')) return '📺';
+            return '📎';
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1);
+            updateFilePreview();
+        }
+
+        // ============================================================================
+        // EVENT FREQUENCY HANDLING
+        // ============================================================================
+
+        function setupEventFrequencyHandling() {
+            const frequencySelect = document.getElementById('eventFrequency');
+            if (!frequencySelect) return;
+
+            frequencySelect.addEventListener('change', function() {
+                hideAllDateGroups();
+                
+                switch (this.value) {
+                    case 'single':
+                        document.getElementById('singleDateGroup').style.display = 'block';
+                        document.getElementById('eventDate').required = true;
+                        break;
+                    case 'multiple':
+                        document.getElementById('multipleDatesGroup').style.display = 'block';
+                        break;
+                    case 'daily':
+                    case 'weekly':
+                    case 'monthly':
+                    case 'yearly':
+                        document.getElementById('recurringGroup').style.display = 'block';
+                        document.getElementById('recurringStartDate').required = true;
+                        document.getElementById('recurringEndDate').required = true;
+                        updateRecurringInterface(this.value);
+                        break;
+                }
+            });
+        }
+
+        function hideAllDateGroups() {
+            const groups = ['singleDateGroup', 'multipleDatesGroup', 'recurringGroup'];
+            groups.forEach(groupId => {
+                const group = document.getElementById(groupId);
+                if (group) {
+                    group.style.display = 'none';
+                }
+            });
+            
+            // Clear required attributes
+            document.getElementById('eventDate').required = false;
+            document.getElementById('recurringStartDate').required = false;
+            document.getElementById('recurringEndDate').required = false;
+        }
+
+        // ============================================================================
+        // MULTIPLE DATES SYSTEM
+        // ============================================================================
+
+        function setupMultipleDatesSystem() {
+            const addDateBtn = document.getElementById('addDateBtn');
+            const multipleDateInput = document.getElementById('multipleDateInput');
+            
+            if (!addDateBtn || !multipleDateInput) return;
+
+            addDateBtn.addEventListener('click', function() {
+                const dateValue = multipleDateInput.value;
+                if (dateValue && !selectedMultipleDates.includes(dateValue)) {
+                    selectedMultipleDates.push(dateValue);
+                    selectedMultipleDates.sort();
+                    updateMultipleDatesDisplay();
+                    multipleDateInput.value = '';
+                }
+            });
+
+            multipleDateInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addDateBtn.click();
+                }
+            });
+        }
+
+        function updateMultipleDatesDisplay() {
+            const listContainer = document.getElementById('selectedDatesList');
+            if (!listContainer) return;
+
+            listContainer.innerHTML = '';
+
+            selectedMultipleDates.forEach((date, index) => {
+                const dateChip = document.createElement('div');
+                dateChip.className = 'date-chip';
+                
+                const formattedDate = new Date(date).toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric'
                 });
+                
+                dateChip.innerHTML = `
+                    <span>${formattedDate}</span>
+                    <button type="button" class="date-chip-remove" onclick="removeMultipleDate(${index})">×</button>
+                `;
+                
+                listContainer.appendChild(dateChip);
+            });
+        }
+
+        function removeMultipleDate(index) {
+            selectedMultipleDates.splice(index, 1);
+            updateMultipleDatesDisplay();
+        }
+
+        // ============================================================================
+        // RECURRING EVENTS SYSTEM
+        // ============================================================================
+
+        function setupRecurringEventsSystem() {
+            const generateBtn = document.getElementById('generatePreviewBtn');
+            if (!generateBtn) return;
+
+            generateBtn.addEventListener('click', generateRecurringPreview);
+            
+            // Auto-generate preview when settings change
+            const triggerElements = [
+                'recurringStartDate', 'recurringEndDate', 'recurringInterval'
+            ];
+            
+            triggerElements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('change', debounce(generateRecurringPreview, 500));
+                }
+            });
+
+            // Handle days of week checkboxes
+            document.querySelectorAll('.days-of-week-selector input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('change', debounce(generateRecurringPreview, 500));
+            });
+
+            // Handle monthly pattern radio buttons
+            document.querySelectorAll('input[name="monthlyPattern"]').forEach(radio => {
+                radio.addEventListener('change', debounce(generateRecurringPreview, 500));
+            });
+        }
+
+        function updateRecurringInterface(frequency) {
+            const intervalLabel = document.getElementById('intervalLabel');
+            const daysOfWeekGroup = document.getElementById('daysOfWeekGroup');
+            const monthlyOptionsGroup = document.getElementById('monthlyOptionsGroup');
+            
+            // Update interval label
+            const labels = {
+                daily: 'day(s)',
+                weekly: 'week(s)',
+                monthly: 'month(s)',
+                yearly: 'year(s)'
+            };
+            
+            if (intervalLabel) {
+                intervalLabel.textContent = labels[frequency] || 'day(s)';
+            }
+            
+            // Show/hide relevant options
+            if (daysOfWeekGroup) {
+                daysOfWeekGroup.style.display = frequency === 'weekly' ? 'block' : 'none';
+            }
+            
+            if (monthlyOptionsGroup) {
+                monthlyOptionsGroup.style.display = frequency === 'monthly' ? 'block' : 'none';
+                if (frequency === 'monthly') {
+                    // Default to "same date each month"
+                    const dateOption = document.querySelector('input[name="monthlyPattern"][value="date"]');
+                    if (dateOption) dateOption.checked = true;
+                }
             }
         }
 
-        // Setup event preview functionality
-        function setupEventPreview() {
-            const previewBtn = document.getElementById('previewBtn');
-            const previewModal = document.getElementById('previewModal');
-            const previewModalClose = document.getElementById('previewModalClose');
-            const editBtn = document.getElementById('editPreviewBtn');
-            const submitFromPreviewBtn = document.getElementById('submitFromPreviewBtn');
-
-            if (previewBtn) {
-                previewBtn.addEventListener('click', showEventPreview);
-            }
-
-            if (previewModalClose) {
-                previewModalClose.addEventListener('click', closeEventPreview);
-            }
-
-            if (editBtn) {
-                editBtn.addEventListener('click', closeEventPreview);
-            }
-
-            if (submitFromPreviewBtn) {
-                submitFromPreviewBtn.addEventListener('click', function() {
-                    closeEventPreview();
-                    document.getElementById('eventForm').dispatchEvent(new Event('submit'));
-                });
-            }
-
-            // Close on overlay click
-            if (previewModal) {
-                previewModal.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        closeEventPreview();
-                    }
-                });
-            }
-        }
-
-        // Show event preview
-        function showEventPreview() {
-            const formData = collectCurrentFormData();
-            const previewContent = document.getElementById('previewContent');
-            const previewModal = document.getElementById('previewModal');
-
-            if (!formData.name) {
-                window.AQEventUtils.showNotification('Please enter an event name to preview', 'warning');
+        function generateRecurringPreview() {
+            const frequency = document.getElementById('eventFrequency').value;
+            const startDate = document.getElementById('recurringStartDate').value;
+            const endDate = document.getElementById('recurringEndDate').value;
+            const interval = parseInt(document.getElementById('recurringInterval').value) || 1;
+            
+            if (!startDate || !endDate || !frequency) {
+                updateRecurringPreviewDisplay([]);
                 return;
             }
-
-            // Generate preview HTML
-            const previewHTML = generateEventPreviewHTML(formData);
-            previewContent.innerHTML = previewHTML;
             
-            // Show modal
-            previewModal.classList.add('show');
-            previewModal.style.display = 'flex';
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            
+            if (start >= end) {
+                updateRecurringPreviewDisplay(['Error: Start date must be before end date']);
+                return;
+            }
+            
+            let dates = [];
+            
+            switch (frequency) {
+                case 'daily':
+                    dates = generateDailyDates(start, end, interval);
+                    break;
+                case 'weekly':
+                    dates = generateWeeklyDates(start, end, interval);
+                    break;
+                case 'monthly':
+                    dates = generateMonthlyDates(start, end, interval);
+                    break;
+                case 'yearly':
+                    dates = generateYearlyDates(start, end, interval);
+                    break;
+            }
+            
+            // Limit preview to first 50 dates
+            if (dates.length > 50) {
+                dates = dates.slice(0, 50);
+                dates.push(`... and ${dates.length - 50} more dates`);
+            }
+            
+            generatedRecurringDates = dates.filter(d => d instanceof Date);
+            updateRecurringPreviewDisplay(dates);
         }
 
-        // Close event preview
-        function closeEventPreview() {
-            const previewModal = document.getElementById('previewModal');
-            previewModal.classList.remove('show');
-            previewModal.style.display = 'none';
+        function generateDailyDates(start, end, interval) {
+            const dates = [];
+            const current = new Date(start);
+            
+            while (current <= end) {
+                dates.push(new Date(current));
+                current.setDate(current.getDate() + interval);
+            }
+            
+            return dates;
         }
 
-        // Generate preview HTML
-        function generateEventPreviewHTML(data) {
-            const selectedStudents = Array.from(document.querySelectorAll('.chip'))
-                .map(chip => chip.textContent.replace('×', '').trim());
-
-            return `
-                <div class="event-detail-grid" style="display: grid; gap: var(--spacing-sm);">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title text-primary">📋 Basic Information</h5>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>Event Name:</strong> ${data.name || 'Not specified'}</p>
-                            <p><strong>Date:</strong> ${data.eventDate ? window.AQEventUtils.DateUtils.formatAcademic(data.eventDate) : 'Not specified'}</p>
-                            <p><strong>Location:</strong> ${data.location || 'Not specified'}</p>
-                            <p><strong>Type:</strong> ${data.eventType || 'Not specified'}</p>
-                            ${data.description ? `<p><strong>Description:</strong> ${data.description}</p>` : ''}
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title text-primary">⏰ Timing</h5>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>Reservation:</strong> ${data.reservationStartTime ? window.AQEventUtils.DateUtils.formatTime(data.reservationStartTime) : 'Not specified'} - ${data.reservationEndTime ? window.AQEventUtils.DateUtils.formatTime(data.reservationEndTime) : 'Not specified'}</p>
-                            <p><strong>Event:</strong> ${data.eventStartTime ? window.AQEventUtils.DateUtils.formatTime(data.eventStartTime) : 'Not specified'} - ${data.eventEndTime ? window.AQEventUtils.DateUtils.formatTime(data.eventEndTime) : 'Not specified'}</p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title text-primary">📞 Contact</h5>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>Contact Person:</strong> ${data.contactPerson || 'Not specified'}</p>
-                            <p><strong>Phone:</strong> ${data.contactNumber || 'Not specified'}</p>
-                            <p><strong>Email:</strong> ${data.contactEmail || 'Not specified'}</p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title text-primary">👥 Staff & Students</h5>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>Staff:</strong> ${data.staffWorkingEvent || 'Not specified'}</p>
-                            <p><strong>Students Needed:</strong> ${document.getElementById('studentToggle').classList.contains('active') ? 'Yes' : 'No'}</p>
-                            ${document.getElementById('studentToggle').classList.contains('active') ? 
-                                `<p><strong>Number of Students:</strong> ${data.numberOfStudentsNeeded || 'Not specified'}</p>` : ''}
-                            ${selectedStudents.length > 0 ? 
-                                `<p><strong>Assigned Students:</strong> ${selectedStudents.join(', ')}</p>` : ''}
-                            ${data.neededLogistics ? `<p><strong>Logistics:</strong> ${data.neededLogistics}</p>` : ''}
-                        </div>
-                    </div>
-                </div>
-            `;
+        function generateWeeklyDates(start, end, interval) {
+            const selectedDays = Array.from(document.querySelectorAll('.days-of-week-selector input:checked'))
+                .map(cb => parseInt(cb.value));
+            
+            if (selectedDays.length === 0) {
+                selectedDays.push(start.getDay()); // Default to start date's day
+            }
+            
+            const dates = [];
+            const current = new Date(start);
+            current.setDate(current.getDate() - current.getDay()); // Start of week
+            
+            while (current <= end) {
+                selectedDays.forEach(day => {
+                    const date = new Date(current);
+                    date.setDate(current.getDate() + day);
+                    
+                    if (date >= start && date <= end) {
+                        dates.push(new Date(date));
+                    }
+                });
+                
+                current.setDate(current.getDate() + (7 * interval));
+            }
+            
+            return dates.sort((a, b) => a - b);
         }
 
-        // Collect current form data
-        function collectCurrentFormData() {
+        function generateMonthlyDates(start, end, interval) {
+            const pattern = document.querySelector('input[name="monthlyPattern"]:checked')?.value || 'date';
+            const dates = [];
+            const current = new Date(start);
+            
+            while (current <= end) {
+                if (pattern === 'date') {
+                    // Same date each month
+                    const targetDate = new Date(current.getFullYear(), current.getMonth(), start.getDate());
+                    if (targetDate.getMonth() === current.getMonth() && targetDate <= end) {
+                        dates.push(new Date(targetDate));
+                    }
+                } else {
+                    // Same day of week (e.g., "2nd Tuesday")
+                    const weekOfMonth = Math.ceil(start.getDate() / 7);
+                    const dayOfWeek = start.getDay();
+                    const targetDate = getNthWeekdayOfMonth(current.getFullYear(), current.getMonth(), weekOfMonth, dayOfWeek);
+                    
+                    if (targetDate && targetDate <= end) {
+                        dates.push(new Date(targetDate));
+                    }
+                }
+                
+                current.setMonth(current.getMonth() + interval);
+            }
+            
+            return dates;
+        }
+
+        function generateYearlyDates(start, end, interval) {
+            const dates = [];
+            const current = new Date(start);
+            
+            while (current <= end) {
+                dates.push(new Date(current));
+                current.setFullYear(current.getFullYear() + interval);
+            }
+            
+            return dates;
+        }
+
+        function getNthWeekdayOfMonth(year, month, week, dayOfWeek) {
+            const firstDay = new Date(year, month, 1);
+            const firstWeekday = firstDay.getDay();
+            const offset = (dayOfWeek - firstWeekday + 7) % 7;
+            const date = new Date(year, month, 1 + offset + (week - 1) * 7);
+            
+            // Check if this date is actually in the target month
+            return date.getMonth() === month ? date : null;
+        }
+
+        function updateRecurringPreviewDisplay(dates) {
+            const previewContainer = document.getElementById('recurringPreview');
+            if (!previewContainer) return;
+            
+            if (dates.length === 0) {
+                previewContainer.textContent = 'Select start date, end date, and options to preview dates';
+                return;
+            }
+            
+            const dateStrings = dates.map(date => {
+                if (typeof date === 'string') return date; // Error messages or "... more"
+                return date.toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+            });
+            
+            previewContainer.innerHTML = dateStrings.join('<br>');
+        }
+
+        // ============================================================================
+        // ENHANCED FORM VALIDATION
+        // ============================================================================
+
+        function setupFormValidation() {
+            const form = document.getElementById('eventForm');
+            if (!form) return;
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateEnhancedForm()) {
+                    // Proceed with submission
+                    handleEnhancedFormSubmission(e);
+                } else {
+                    window.AQEventUtils.showNotification('Please correct the errors before submitting', 'error');
+                }
+            });
+        }
+
+        function validateEnhancedForm() {
+            let isValid = true;
+            
+            // Validate basic required fields
+            const requiredFields = ['eventName', 'location', 'eventType', 'estimatedAttendees', 'description', 'contactPerson', 'groupCompanyType', 'contactNumber', 'contactEmail'];
+            
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field && !field.value.trim()) {
+                    showFieldError(field, 'This field is required');
+                    isValid = false;
+                }
+            });
+            
+            // Validate date selection based on frequency
+            const frequency = document.getElementById('eventFrequency').value;
+            if (!frequency) {
+                showFieldError(document.getElementById('eventFrequency'), 'Please select an event frequency');
+                isValid = false;
+            } else {
+                switch (frequency) {
+                    case 'single':
+                        if (!document.getElementById('eventDate').value) {
+                            showFieldError(document.getElementById('eventDate'), 'Event date is required');
+                            isValid = false;
+                        }
+                        break;
+                    case 'multiple':
+                        if (selectedMultipleDates.length === 0) {
+                            window.AQEventUtils.showNotification('Please select at least one date for multiple date events', 'error');
+                            isValid = false;
+                        }
+                        break;
+                    case 'daily':
+                    case 'weekly':
+                    case 'monthly':
+                    case 'yearly':
+                        if (!document.getElementById('recurringStartDate').value || !document.getElementById('recurringEndDate').value) {
+                            window.AQEventUtils.showNotification('Start date and end date are required for recurring events', 'error');
+                            isValid = false;
+                        }
+                        break;
+                }
+            }
+            
+            // Validate acknowledgements
+            const acknowledgements = ['bookingAcknowledgement', 'expenseAcknowledgement'];
+            acknowledgements.forEach(ackId => {
+                const ack = document.getElementById(ackId);
+                if (ack && !ack.checked) {
+                    showFieldError(ack.closest('.form-group'), 'This acknowledgement is required');
+                    isValid = false;
+                }
+            });
+            
+            // Validate organization type for external organizations
+            const groupType = document.getElementById('groupCompanyType').value;
+            if (groupType === 'external-organization') {
+                const orgTypes = document.querySelectorAll('#externalOrgDetails input[type="checkbox"]:checked');
+                if (orgTypes.length === 0) {
+                    window.AQEventUtils.showNotification('Please select at least one organization type for external organizations', 'error');
+                    isValid = false;
+                }
+            }
+            
+            return isValid;
+        }
+
+        // ============================================================================
+        // ENHANCED FORM SUBMISSION
+        // ============================================================================
+
+        async function handleEnhancedFormSubmission(event) {
+            console.log('📤 Processing W&M Event Submission...');
+            
+            try {
+                window.AQEventUtils.showLoadingState('Preparing your event submission...');
+                
+                // Collect enhanced form data
+                const formData = collectEnhancedFormData();
+                
+                // Handle file uploads first
+                if (uploadedFiles.length > 0) {
+                    window.AQEventUtils.showLoadingState('Uploading event files...');
+                    formData.uploadedFiles = await uploadEventFiles();
+                }
+                
+                // Generate events based on frequency
+                const events = generateEventsFromFormData(formData);
+                
+                window.AQEventUtils.showLoadingState('Submitting events for approval...');
+                
+                // Submit each event
+                const results = [];
+                for (let i = 0; i < events.length; i++) {
+                    const result = await window.GitHubAPI.submitEventForApproval(events[i]);
+                    results.push(result);
+                }
+                
+                window.AQEventUtils.hideLoadingState();
+                
+                // Show success message
+                const successCount = results.filter(r => r.success).length;
+                const totalCount = results.length;
+                
+                if (successCount === totalCount) {
+                    window.AQEventUtils.showNotification(
+                        `✅ Successfully submitted ${successCount} event${successCount > 1 ? 's' : ''} for approval!`,
+                        'success',
+                        7000
+                    );
+                    
+                    // Show detailed success dialog
+                    const eventIds = results.map(r => r.eventId).join(', ');
+                    alert(
+                        `🎉 Success!\n\n` +
+                        `Your ${totalCount} event${totalCount > 1 ? 's have' : ' has'} been submitted for approval.\n\n` +
+                        `Event ID${totalCount > 1 ? 's' : ''}: ${eventIds}\n\n` +
+                        `What happens next:\n` +
+                        `• The Events Committee will review your submission${totalCount > 1 ? 's' : ''}\n` +
+                        `• You'll receive email notifications once approved\n` +
+                        `• Processing time: 1-3 business days`
+                    );
+                    
+                    // Reset form
+                    resetEnhancedForm();
+                } else {
+                    window.AQEventUtils.showNotification(
+                        `⚠️ ${successCount} of ${totalCount} events submitted successfully. Some events failed to submit.`,
+                        'warning'
+                    );
+                }
+                
+            } catch (error) {
+                window.AQEventUtils.hideLoadingState();
+                console.error('❌ Enhanced submission error:', error);
+                window.AQEventUtils.showNotification('Error submitting event: ' + error.message, 'error');
+            }
+        }
+
+        function collectEnhancedFormData() {
+            const groupType = document.getElementById('groupCompanyType').value;
+            let organizationTypes = [];
+            
+            if (groupType === 'external-organization') {
+                const checkboxes = document.querySelectorAll('#externalOrgDetails input[type="checkbox"]:checked');
+                organizationTypes = Array.from(checkboxes).map(cb => cb.id.replace(/([A-Z])/g, ' $1').trim());
+            }
+            
             return {
-                name: document.getElementById('eventName')?.value || '',
-                eventDate: document.getElementById('eventDate')?.value || '',
-                location: document.getElementById('location')?.value || '',
-                eventType: document.getElementById('eventType')?.value || '',
-                description: document.getElementById('description')?.value || '',
-                reservationStartTime: document.getElementById('reservationStartTime')?.value || '',
-                reservationEndTime: document.getElementById('reservationEndTime')?.value || '',
-                eventStartTime: document.getElementById('eventStartTime')?.value || '',
-                eventEndTime: document.getElementById('eventEndTime')?.value || '',
-                contactPerson: document.getElementById('contactPerson')?.value || '',
-                contactNumber: document.getElementById('contactNumber')?.value || '',
-                contactEmail: document.getElementById('contactEmail')?.value || '',
-                staffWorkingEvent: document.getElementById('staffWorkingEvent')?.value || '',
-                neededLogistics: document.getElementById('neededLogistics')?.value || '',
-                numberOfStudentsNeeded: document.getElementById('numberOfStudents')?.value || 0
+                // Basic information
+                name: document.getElementById('eventName').value,
+                location: document.getElementById('location').value,
+                eventType: document.getElementById('eventType').value,
+                estimatedAttendees: parseInt(document.getElementById('estimatedAttendees').value) || 0,
+                totalPerformers: parseInt(document.getElementById('totalPerformers').value) || 0,
+                staffingSupportRequired: document.getElementById('staffingSupportToggle').classList.contains('active'),
+                estimatedBudget: parseFloat(document.getElementById('estimatedBudget').value) || 0,
+                description: document.getElementById('description').value,
+                
+                // Timing
+                reservationStartTime: document.getElementById('reservationStartTime').value,
+                reservationEndTime: document.getElementById('reservationEndTime').value,
+                eventStartTime: document.getElementById('eventStartTime').value,
+                eventEndTime: document.getElementById('eventEndTime').value,
+                
+                // Contact information
+                contactPerson: document.getElementById('contactPerson').value,
+                groupCompanyName: document.getElementById('groupCompanyName').value,
+                groupCompanyType: groupType,
+                organizationTypes: organizationTypes,
+                contactNumber: document.getElementById('contactNumber').value,
+                contactEmail: document.getElementById('contactEmail').value,
+                websiteAddress: document.getElementById('websiteAddress').value,
+                
+                // Frequency and dates
+                eventFrequency: document.getElementById('eventFrequency').value,
+                
+                // Acknowledgements
+                acknowledgements: {
+                    bookingUnderstanding: document.getElementById('bookingAcknowledgement').checked,
+                    expenseResponsibility: document.getElementById('expenseAcknowledgement').checked
+                }
             };
         }
 
-        // Setup time helpers
-        function setupTimeHelpers() {
-            // Auto-suggest event times based on reservation
-            const reservationStart = document.getElementById('reservationStartTime');
-            const reservationEnd = document.getElementById('reservationEndTime');
-            const eventStart = document.getElementById('eventStartTime');
-            const eventEnd = document.getElementById('eventEndTime');
-
-            if (reservationStart && eventStart) {
-                reservationStart.addEventListener('change', function() {
-                    if (this.value && !eventStart.value) {
-                        // Suggest event start 15 minutes after reservation start
-                        const [hours, minutes] = this.value.split(':');
-                        const suggestedTime = new Date();
-                        suggestedTime.setHours(parseInt(hours), parseInt(minutes) + 15);
-                        
-                        eventStart.value = suggestedTime.toTimeString().slice(0, 5);
-                    }
-                });
+        function generateEventsFromFormData(formData) {
+            const events = [];
+            const frequency = formData.eventFrequency;
+            
+            let dates = [];
+            
+            switch (frequency) {
+                case 'single':
+                    dates = [document.getElementById('eventDate').value];
+                    break;
+                case 'multiple':
+                    dates = [...selectedMultipleDates];
+                    break;
+                case 'daily':
+                case 'weekly':
+                case 'monthly':
+                case 'yearly':
+                    dates = generatedRecurringDates.map(d => d.toISOString().split('T')[0]);
+                    break;
             }
-
-            if (reservationEnd && eventEnd) {
-                reservationEnd.addEventListener('change', function() {
-                    if (this.value && !eventEnd.value) {
-                        // Suggest event end 15 minutes before reservation end
-                        const [hours, minutes] = this.value.split(':');
-                        const suggestedTime = new Date();
-                        suggestedTime.setHours(parseInt(hours), parseInt(minutes) - 15);
-                        
-                        eventEnd.value = suggestedTime.toTimeString().slice(0, 5);
-                    }
-                });
-            }
-        }
-
-        // Setup form auto-save (local storage)
-        function setupFormAutoSave() {
-            const form = document.getElementById('eventForm');
-            const inputs = form.querySelectorAll('input, select, textarea');
-
-            // Load saved data
-            loadFormData();
-
-            // Save data on input
-            inputs.forEach(input => {
-                input.addEventListener('input', debounce(saveFormData, 1000));
-            });
-
-            // Clear saved data on successful submission
-            form.addEventListener('submit', function() {
-                clearSavedFormData();
-            });
-        }
-
-        // Save form data to localStorage
-        function saveFormData() {
-            const formData = collectCurrentFormData();
-            localStorage.setItem('aqevent_form_draft', JSON.stringify(formData));
-            console.log('💾 Form data auto-saved');
-        }
-
-        // Load form data from localStorage
-        function loadFormData() {
-            try {
-                const saved = localStorage.getItem('aqevent_form_draft');
-                if (saved) {
-                    const data = JSON.parse(saved);
-                    
-                    // Populate form fields
-                    Object.keys(data).forEach(key => {
-                        const element = document.getElementById(key === 'name' ? 'eventName' : key);
-                        if (element && data[key]) {
-                            element.value = data[key];
-                        }
-                    });
-
-                    console.log('📄 Loaded saved form data');
-                    window.AQEventUtils.showNotification('Restored your previous draft', 'info');
+            
+            dates.forEach((date, index) => {
+                const eventData = { ...formData };
+                eventData.eventDate = date;
+                
+                // Add series information for multiple events
+                if (dates.length > 1) {
+                    eventData.isPartOfSeries = true;
+                    eventData.seriesIndex = index + 1;
+                    eventData.seriesTotalCount = dates.length;
+                    eventData.name = `${formData.name} (${index + 1}/${dates.length})`;
                 }
-            } catch (error) {
-                console.error('Error loading saved form data:', error);
+                
+                events.push(eventData);
+            });
+            
+            return events;
+        }
+
+        async function uploadEventFiles() {
+            const fileData = [];
+            
+            for (const file of uploadedFiles) {
+                try {
+                    const base64Data = await fileToBase64(file);
+                    fileData.push({
+                        name: file.name,
+                        type: file.type,
+                        size: file.size,
+                        data: base64Data,
+                        uploadedAt: new Date().toISOString()
+                    });
+                } catch (error) {
+                    console.error('Error converting file to base64:', error);
+                }
+            }
+            
+            return fileData;
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        function resetEnhancedForm() {
+            const form = document.getElementById('eventForm');
+            if (form) {
+                form.reset();
+                
+                // Reset enhanced form state
+                selectedMultipleDates = [];
+                uploadedFiles = [];
+                generatedRecurringDates = [];
+                
+                // Reset UI elements
+                updateMultipleDatesDisplay();
+                updateFilePreview();
+                updateRecurringPreviewDisplay([]);
+                hideAllDateGroups();
+                
+                // Reset toggles
+                const staffingToggle = document.getElementById('staffingSupportToggle');
+                if (staffingToggle) staffingToggle.classList.remove('active');
+                
+                // Hide external org details
+                const externalOrgDetails = document.getElementById('externalOrgDetails');
+                if (externalOrgDetails) externalOrgDetails.style.display = 'none';
+                
+                // Clear saved draft
+                localStorage.removeItem('aqevent_form_draft');
             }
         }
 
-        // Clear saved form data
-        function clearSavedFormData() {
-            localStorage.removeItem('aqevent_form_draft');
+        // ============================================================================
+        // UTILITY FUNCTIONS
+        // ============================================================================
+
+        function showFieldError(field, message) {
+            // Clear existing error
+            const existingError = field.parentNode.querySelector('.field-error');
+            if (existingError) existingError.remove();
+            
+            field.style.borderColor = 'var(--wm-error)';
+            field.classList.add('error');
+            
+            const error = document.createElement('div');
+            error.className = 'field-error';
+            error.style.cssText = `
+                color: var(--wm-error);
+                font-size: var(--font-size-sm);
+                margin-top: 4px;
+                font-weight: 500;
+            `;
+            error.textContent = message;
+            
+            field.parentNode.appendChild(error);
         }
 
-        // Debounce function
         function debounce(func, wait) {
             let timeout;
             return function executedFunction(...args) {
@@ -665,33 +1714,12 @@
             };
         }
 
-        // Enhanced form reset
-        function resetForm() {
-            if (confirm('Are you sure you want to reset the form? All unsaved data will be lost.')) {
-                document.getElementById('eventForm').reset();
-                
-                // Reset student chips
-                const chips = document.querySelector('.student-chips');
-                if (chips) chips.innerHTML = '';
-                
-                // Reset toggle
-                const toggle = document.getElementById('studentToggle');
-                if (toggle) toggle.classList.remove('active');
-                
-                const numberGroup = document.getElementById('numberOfStudentsGroup');
-                if (numberGroup) numberGroup.classList.add('d-none');
-                
-                // Clear saved data
-                clearSavedFormData();
-                
-                window.AQEventUtils.showNotification('Form reset successfully', 'success');
-            }
-        }
+        // Make global functions available
+        window.removeMultipleDate = removeMultipleDate;
+        window.removeFile = removeFile;
+        window.resetForm = resetEnhancedForm;
 
-        // Make resetForm available globally
-        window.resetForm = resetForm;
-
-        console.log('📝 Event submission form JavaScript loaded');
+        console.log('📝 Enhanced Event Form JavaScript loaded successfully');
     </script>
 </body>
 </html>
