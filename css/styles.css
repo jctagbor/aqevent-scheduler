@@ -1124,6 +1124,34 @@ strong, b {
     border-top: 1px solid var(--wm-gray-200);
 }
 
+/* Add to admin.html or styles.css */
+.stat-card {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin: 0 var(--spacing-xs);
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin: 0;
+}
+
+.active-filter-tag {
+    display: inline-block;
+    background: var(--wm-primary-green);
+    color: white;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    margin-right: var(--spacing-xs);
+}
+
 /* ============================================================================
    END OF WILLIAM & MARY BRANDED STYLES
    ============================================================================ */
