@@ -1,0 +1,25 @@
+{
+  "categories": [
+    "Rehearsal",
+    "Performance",
+    "Workshop",
+    "Departmental Use",
+    "External Event",
+    "Main Event",
+    "Presented Season",
+    "Meeting",
+    "Ampersand",
+    "Masterclass",
+    "Lecture",
+    "Film Screening",
+    "Panel Discussion",
+    "Tech Setup",
+    "Reception"
+  ],
+  "lastUpdated": "2025-07-18T00:00:00.000Z",
+  "metadata": {
+    "description": "List of predefined event categories used for classification.",
+    "createdBy": "AQEvent Scheduler v2.0",
+    "version": "1.0"
+  }
+}
