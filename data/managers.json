@@ -1,0 +1,19 @@
+{
+  "managers": [
+    "Dame, Corinne - Production Manager",
+    "Tagbor, John Carl - Asst. Production Manager",
+    "Schultze, Stephanie - Administrative & Fiscal Coordinator",
+    "Nichols, John - Technical Director",
+    "Casey O'Neal - Technical Manager (Music)",
+    "Stella Davies - Electrics Technician",
+    "Carson Bannisterk - Sound Technician",
+    "Veronique-Carol MacDonald - Public Relations & Marketing Specialist",
+    "James King - Box Office Manager"
+  ],
+  "lastUpdated": "2025-07-18T00:00:00.000Z",
+  "metadata": {
+    "description": "List of available event managers and tech staff for assignment.",
+    "createdBy": "AQEvent Scheduler v2.0",
+    "version": "1.0"
+  }
+}
