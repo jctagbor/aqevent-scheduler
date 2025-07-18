@@ -21,8 +21,58 @@
       "assignedStudents": "Tyler Jackson, Sarah Johnson",
       "submittedAt": "2025-07-16T15:07:28.425Z",
       "status": "pending"
+    },
+    {
+      "id": "EVT_1752855360117_630",
+      "name": "New Test  (1/2)",
+      "location": "Concert Hall (Room 132)",
+      "eventType": "Music Concert",
+      "estimatedAttendees": 300,
+      "totalPerformers": 7,
+      "staffingSupportRequired": false,
+      "estimatedBudget": 20000,
+      "description": "backstage",
+      "reservationStartTime": "09:00",
+      "reservationEndTime": "21:00",
+      "eventStartTime": "18:00",
+      "eventEndTime": "20:00",
+      "contactPerson": "John Doe",
+      "groupCompanyName": "Test Company",
+      "groupCompanyType": "external-organization",
+      "organizationTypes": [
+        "non Profit Org",
+        "va Tax Exempt",
+        "org501c3"
+      ],
+      "contactNumber": "7171231234",
+      "contactEmail": "test@wm.edu",
+      "websiteAddress": "@testhandle",
+      "eventFrequency": "daily",
+      "acknowledgements": {
+        "bookingUnderstanding": true,
+        "expenseResponsibility": true
+      },
+      "eventDate": "2025-07-19",
+      "isPartOfSeries": true,
+      "seriesIndex": 1,
+      "seriesTotalCount": 2,
+      "submittedAt": "2025-07-18T16:16:00.117Z",
+      "status": "pending",
+      "version": "2.0",
+      "submissionMetadata": {
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0",
+        "submissionSource": "AQEvent Form v2.0",
+        "ipTimestamp": 1752855360117,
+        "formVersion": "2.0"
+      }
     }
   ],
-  "lastUpdated": "2025-07-16T15:07:28.425Z",
-  "count": 1
+  "lastUpdated": "2025-07-18T16:16:00.271Z",
+  "count": 2,
+  "version": "2.0",
+  "metadata": {
+    "updatedBy": "AQEvent Scheduler v2.0",
+    "updateTimestamp": 1752855360271,
+    "recordCount": 2
+  }
 }
