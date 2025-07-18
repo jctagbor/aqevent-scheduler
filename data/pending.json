@@ -1,28 +1,6 @@
 {
   "events": [
     {
-      "id": "EVT_1752678448425_849",
-      "name": "Meeting Demo",
-      "eventDate": "2025-07-17",
-      "location": "Concert Hall (Room 132)",
-      "eventType": "Meeting",
-      "description": "Test",
-      "reservationStartTime": "09:00",
-      "reservationEndTime": "13:00",
-      "eventStartTime": "09:15",
-      "eventEndTime": "12:45",
-      "contactPerson": "John Doe",
-      "contactNumber": "(123) 755-8850",
-      "contactEmail": "jaydee@wm.edu",
-      "staffWorkingEvent": "John Carl",
-      "neededLogistics": "1 Mic",
-      "studentEmployeesNeeded": "Yes",
-      "numberOfStudentsNeeded": "2",
-      "assignedStudents": "Tyler Jackson, Sarah Johnson",
-      "submittedAt": "2025-07-16T15:07:28.425Z",
-      "status": "pending"
-    },
-    {
       "id": "EVT_1752855360844_738",
       "name": "New Test  (2/2)",
       "location": "Concert Hall (Room 132)",
@@ -67,12 +45,12 @@
       }
     }
   ],
-  "lastUpdated": "2025-07-18T16:16:00.975Z",
-  "count": 2,
+  "lastUpdated": "2025-07-18T16:36:38.739Z",
+  "count": 1,
   "version": "2.0",
   "metadata": {
     "updatedBy": "AQEvent Scheduler v2.0",
-    "updateTimestamp": 1752855360975,
-    "recordCount": 2
+    "updateTimestamp": 1752856598739,
+    "recordCount": 1
   }
 }
