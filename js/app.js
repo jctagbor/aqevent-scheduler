@@ -29,31 +29,42 @@ window.AQEvent = {
         locations: [
             'Concert Hall (Room 132)',
             'Comey Recital Hall (Room 142)',
-            'Choral Rehearsal Room (Room 154)',
-            'Instrumental Rehearsal Room (Room 116)',
-            'Classroom (Room 217)',
-            'Classroom (Room 228)',
-            'Global Ensembles Room (Room 159)',
             'The Glenn Close Theatre',
             'Studio Theatre',
-            'Laboratory Theatre'
         ],
         
-        // Academic event types
         eventTypes: [
-            'Presented Season',
-            'Theatre',
-            'Music Concert',
-            'AQ Music Series',
-            'Conference',
-            'Seminar',
-            'Arts Exhibition',
-            'Workshop',
-            'Rehearsal',
-            'Performance',
-            'Meeting',
-            'Others'
-        ],
+    // Arts & Performance
+    'Theatre',
+    'Music Concert',
+    'Dance Performance',
+    'Film Screening',
+    'Arts Exhibition',
+    'Rehearsal',
+    'Performance',
+    'Lecture',
+    'Seminar',
+    'Conference',
+    'Panel Discussion',
+    'Workshop',
+    'Masterclass',
+    'Symposium',
+    'Meeting',
+    'Orientation',
+    'Info Session',
+    'Ceremony ',
+    'Open House',
+    'Community Gathering',
+    'Fundraiser',
+    'Social Event',
+    'Music Recital',
+    'Competition',
+    'Audition',
+    'Technical Setup Only',
+    'Private Event',
+    'Other'
+]
+
         
         // Academic time slots
         timeSlots: {
