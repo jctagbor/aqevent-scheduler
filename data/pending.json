@@ -1,56 +1,11 @@
 {
-  "events": [
-    {
-      "id": "EVT_1752855360844_738",
-      "name": "New Test  (2/2)",
-      "location": "Concert Hall (Room 132)",
-      "eventType": "Music Concert",
-      "estimatedAttendees": 300,
-      "totalPerformers": 7,
-      "staffingSupportRequired": false,
-      "estimatedBudget": 20000,
-      "description": "backstage",
-      "reservationStartTime": "09:00",
-      "reservationEndTime": "21:00",
-      "eventStartTime": "18:00",
-      "eventEndTime": "20:00",
-      "contactPerson": "John Doe",
-      "groupCompanyName": "Test Company",
-      "groupCompanyType": "external-organization",
-      "organizationTypes": [
-        "non Profit Org",
-        "va Tax Exempt",
-        "org501c3"
-      ],
-      "contactNumber": "7171231234",
-      "contactEmail": "test@wm.edu",
-      "websiteAddress": "@testhandle",
-      "eventFrequency": "daily",
-      "acknowledgements": {
-        "bookingUnderstanding": true,
-        "expenseResponsibility": true
-      },
-      "eventDate": "2025-07-20",
-      "isPartOfSeries": true,
-      "seriesIndex": 2,
-      "seriesTotalCount": 2,
-      "submittedAt": "2025-07-18T16:16:00.844Z",
-      "status": "pending",
-      "version": "2.0",
-      "submissionMetadata": {
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0",
-        "submissionSource": "AQEvent Form v2.0",
-        "ipTimestamp": 1752855360844,
-        "formVersion": "2.0"
-      }
-    }
-  ],
-  "lastUpdated": "2025-07-18T16:37:01.012Z",
-  "count": 1,
+  "events": [],
+  "lastUpdated": "2025-07-21T13:17:30.552Z",
+  "count": 0,
   "version": "2.0",
   "metadata": {
     "updatedBy": "AQEvent Scheduler v2.0",
-    "updateTimestamp": 1752856621012,
-    "recordCount": 1
+    "updateTimestamp": 1753103850553,
+    "recordCount": 0
   }
 }
