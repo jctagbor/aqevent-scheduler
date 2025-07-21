@@ -1,1 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create New Event | AQEvent Admin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Create New Event</h1>
+    <nav>
+      <a href="admin.html">← Back to Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <form id="createEventForm">
+      <fieldset>
+        <legend>Event Information</legend>
+
+        <label>Event Name:
+          <input type="text" id="eventName" required />
+        </label>
+
+        <label>Event Date:
+          <input type="date" id="eventDate" required />
+        </label>
+
+        <label>Location:
+          <input type="text" id="location" required />
+        </label>
+
+        <label>Event Type:
+          <input type="text" id="eventType" />
+        </label>
+
+        <label>Estimated Attendees:
+          <input type="number" id="estimatedAttendees" />
+        </label>
+
+        <label>Total Performers:
+          <input type="number" id="totalPerformers" />
+        </label>
+
+        <label>Estimated Budget ($):
+          <input type="number" id="estimatedBudget" />
+        </label>
+
+        <label>Event Category:
+          <select id="eventCategory"></select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Contact Details</legend>
+
+        <label>Contact Person:
+          <input type="text" id="contactPerson" />
+        </label>
+
+        <label>Contact Email:
+          <input type="email" id="contactEmail" />
+        </label>
+
+        <label>Contact Number:
+          <input type="text" id="contactNumber" />
+        </label>
+
+        <label>Organization Type:
+          <input type="text" id="groupCompanyType" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Scheduling & Staff</legend>
+
+        <label>Reservation Time:
+          <input type="text" id="reservationStartTime" placeholder="Start time" />
+          to
+          <input type="text" id="reservationEndTime" placeholder="End time" />
+        </label>
+
+        <label>Event Time:
+          <input type="text" id="eventStartTime" placeholder="Start time" />
+          to
+          <input type="text" id="eventEndTime" placeholder="End time" />
+        </label>
+
+        <label>Student Workers (comma-separated):
+          <input type="text" id="studentWorkers" placeholder="e.g. John Doe, Jane Smith" />
+        </label>
+
+        <label>Event Managers:
+          <select id="eventManagers" multiple></select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Additional Info</legend>
+
+        <label>Event Description:
+          <textarea id="description" rows="4"></textarea>
+        </label>
+
+        <label>Attachments:
+          <input type="file" id="attachments" multiple />
+        </label>
+      </fieldset>
+
+      <button type="submit">Add Event</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; AQEvent Scheduler 2025</p>
+  </footer>
+
+  <script src="js/github-api.js"></script>
+  <script src="js/event-utils.js"></script>
+  <script src="js/create-event.js"></script>
+</body>
+</html>
 
