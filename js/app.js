@@ -30,7 +30,7 @@ window.AQEvent = {
             'Concert Hall (Room 132)',
             'Comey Recital Hall (Room 142)',
             'The Glenn Close Theatre',
-            'Studio Theatre',
+            'Studio Theatre'
         ],
         
         eventTypes: [
@@ -63,7 +63,7 @@ window.AQEvent = {
             'Technical Setup Only',
             'Private Event',
             'Other'
-        ]
+        ],
 
         
         // Academic time slots
