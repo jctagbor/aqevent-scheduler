@@ -34,36 +34,36 @@ window.AQEvent = {
         ],
         
         eventTypes: [
-    // Arts & Performance
-    'Theatre',
-    'Music Concert',
-    'Dance Performance',
-    'Film Screening',
-    'Arts Exhibition',
-    'Rehearsal',
-    'Performance',
-    'Lecture',
-    'Seminar',
-    'Conference',
-    'Panel Discussion',
-    'Workshop',
-    'Masterclass',
-    'Symposium',
-    'Meeting',
-    'Orientation',
-    'Info Session',
-    'Ceremony ',
-    'Open House',
-    'Community Gathering',
-    'Fundraiser',
-    'Social Event',
-    'Music Recital',
-    'Competition',
-    'Audition',
-    'Technical Setup Only',
-    'Private Event',
-    'Other'
-]
+            // Arts & Performance
+            'Theatre',
+            'Music Concert',
+            'Dance Performance',
+            'Film Screening',
+            'Arts Exhibition',
+            'Rehearsal',
+            'Performance',
+            'Lecture',
+            'Seminar',
+            'Conference',
+            'Panel Discussion',
+            'Workshop',
+            'Masterclass',
+            'Symposium',
+            'Meeting',
+            'Orientation',
+            'Info Session',
+            'Ceremony ',
+            'Open House',
+            'Community Gathering',
+            'Fundraiser',
+            'Social Event',
+            'Music Recital',
+            'Competition',
+            'Audition',
+            'Technical Setup Only',
+            'Private Event',
+            'Other'
+        ]
 
         
         // Academic time slots
@@ -2272,13 +2272,13 @@ function showTokenSetupDialog() {
 // Load initial application data
 async function loadInitialData() {
     try {
-        console.log('📊 Loading enhanced initial application data...');
+        console.log('📊 Loading initial application data...');
         
         // Enhanced data loading would go here
         // This is where we might load configuration, user preferences, etc.
         
     } catch (error) {
-        console.error('❌ Error loading enhanced initial data:', error);
+        console.error('❌ Error loading initial data:', error);
     }
 }
 
@@ -2492,7 +2492,7 @@ window.AQEventUtils = {
 // ENHANCED APPLICATION READY
 // ============================================================================
 
-console.log('🎓 William & Mary AQEvent Scheduler Enhanced app.js v2.0 loaded successfully!');
-console.log('📚 Enhanced utilities: window.AQEventUtils');
-console.log('🌐 Enhanced application state: window.AQEvent');
-console.log('🚀 Features: Multiple dates, file uploads, enhanced validation, recurring events');
+console.log('William & Mary AQEvent Scheduler Enhanced app.js v2.0 loaded successfully!');
+console.log('Utilities: window.AQEventUtils');
+console.log('Application state: window.AQEvent');
+console.log('Features: Multiple dates, file uploads, enhanced validation, recurring events');
