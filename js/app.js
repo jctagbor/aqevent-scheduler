@@ -27,10 +27,10 @@ window.AQEvent = {
         
         // W&M specific locations
         locations: [
-            'Concert Hall (Room 132)',
-            'Comey Recital Hall (Room 142)',
-            'The Glenn Close Theatre',
-            'Studio Theatre'
+            'Concert Hall (Music Building Rm132)',
+            'Comey Recital Hall (Music Building Rm142)',
+            'The Glenn Close Theatre (PBK)',
+            'Studio Theatre (PBK)'
         ],
         
         eventTypes: [
